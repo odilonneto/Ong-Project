@@ -1,0 +1,9 @@
+{% if all_ongs_list %}
+    <ul>
+    {% for ong in all_ongs_list %}
+        <li><a href="/ongs/{{ ong.ong_name }}/">{{ ong.ong_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No ongs are available.</p>
+{% endif %}

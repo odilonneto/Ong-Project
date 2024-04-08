@@ -1,0 +1,6 @@
+<h1> {{ ong.ong_name }}<h1>
+    <ul>
+        {% for pet in ong.pet_set.all %}
+        <li><a href="/ongs/{{ ong.ong_name }}/pets/{{ pet.id }}">{{ pet.pet_name }}</a></li>
+        {% endfor %}
+    </ul>
