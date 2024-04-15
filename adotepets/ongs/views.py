@@ -20,4 +20,4 @@ def pets_available(request, ong_name):
 
 def pet_x(request, ong_name, pet_id):
     pet = get_object_or_404(Pet, id = pet_id)
-    return HttpResponse("Está visualizando a página do pet %s." % pet.pet_name)
+    return render(request, "ongs/pet.html", {"pet": pet})
