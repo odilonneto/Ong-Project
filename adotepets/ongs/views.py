@@ -2,6 +2,15 @@ from django.http import HttpResponse
 from .models import ONG, Pet
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, get_list_or_404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from . serializer import *
+from rest_framework import generics
+
+class ONGView(generics.ListCreateAPIView):
+    queryset = ONG.objects.all()
+    serializer_class = ONGSerializer
+
 
 def index(request):
     all_ongs_list = ONG.objects.all()

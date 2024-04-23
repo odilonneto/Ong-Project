@@ -72,7 +72,7 @@ class ONG(models.Model):
     ong_address = models.CharField(max_length=200, validators=[validate_address])
     ong_cnpj = models.CharField(blank=True, validators=[validate_cnpj])
     ong_phone_number = models.IntegerField()
-    ong_email = models.CharField(validators=[EmailValidator])
+    ong_email = models.CharField(validators=[email_validator])
     def __str__(self):
         return f'ONG: {self.ong_name}'
 
