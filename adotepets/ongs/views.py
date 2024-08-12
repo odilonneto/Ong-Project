@@ -26,7 +26,7 @@ class PetListCreate(generics.ListCreateAPIView):
 class PetDelete(generics.DestroyAPIView):
     serializer_class = PetSerializer
     permission_classes = [IsAuthenticated]
-    def get_queryset(self)
+    def get_queryset(self):
         ong = self.request.ong
         return Pet.objects.filter(ong=ong)
 class CreateUserView(generics.CreateAPIView):
