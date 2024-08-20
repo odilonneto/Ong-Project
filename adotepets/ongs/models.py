@@ -70,6 +70,8 @@ class ONG(models.Model):
     ong_cnpj = models.CharField(blank=True, validators=[validate_cnpj])
     ong_phone_number = models.CharField(max_length=12)
     ong_email = models.CharField(validators=[EmailValidator])
+    class Meta:
+        permissions = [("pet_creation", "can create pets")]
     def __str__(self):
         return f'ONG: {self.ong_name}'
 

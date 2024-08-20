@@ -9,7 +9,16 @@ from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-class PetListCreate(generics.ListCreateAPIView):
+
+class PetList(generics.ListAPIView):
+    serializer_class = PetSerializer
+    permission_classes = [AllowAny]
+    def get_queryset(self):
+        ong = self.request.ong
+        return Pet.objects.filter(ong=ong)
+
+
+class PetCreate(generics.CreateAPIView):
     serializer_class = PetSerializer
     permission_classes = [IsAuthenticated]
 
@@ -37,9 +46,17 @@ class CreateUserView(generics.CreateAPIView):
     permission_classes = [AllowAny]
 
 
-class ONGListCreate(generics.ListCreateAPIView):
+class ONGRegister(generics.CreateAPIView):
     queryset = ONG.objects.all()
     serializer_class = ONGSerializer
     permission_classes = [AllowAny]
 
+class UserIsOng(APIView):
+    def get(self, request):
+        username = self.request.data['username']
+        user_id = User.objects.filter(username=username)[0].id
+        user_exists = ONG.objects.filter(user_id=user_id).exists()
+        return Response(
+            data={'message': user_exists}
+        )
 
