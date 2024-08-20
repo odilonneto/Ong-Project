@@ -1,16 +1,10 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 from  django.core.validators import EmailValidator
+from django.contrib.auth.models import User
 
 
 invalid_characters = ['!', '@', '#', '$', '%', '¨¨', '(', ')', '=', '+', '/', '?', ',', ':', ';', '"', '[', ']', '.']
-def validate_valid_name(name):
-    if len(name) < 8:
-        raise ValidationError('%s is not a valid name' % name)
-    for letter in name:
-        if letter.isnumeric() or letter in invalid_characters:
-            raise ValidationError('%s is not a valid name' % name)
-
 
 def validate_address(address):
     for letter in address:
@@ -34,6 +28,7 @@ def find_last_cnpj_numbers(cnpj):
         return '0'
     else:
         return str(11 - rest)
+
 def validate_cnpj(cnpj):
     for number in cnpj:
         if not number.isnumeric():
@@ -68,11 +63,13 @@ def email_validator(email):
 
 
 class ONG(models.Model):
-    ong_name = models.CharField(max_length=40, validators=[validate_valid_name])
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    ong_name = models.CharField(max_length=40)
+    custom_url = models.CharField(max_length=20, default=str(ong_name).replace(' ', ''), blank=True)
     ong_address = models.CharField(max_length=200, validators=[validate_address])
     ong_cnpj = models.CharField(blank=True, validators=[validate_cnpj])
-    ong_phone_number = models.IntegerField()
-    ong_email = models.CharField(validators=[email_validator])
+    ong_phone_number = models.CharField(max_length=12)
+    ong_email = models.CharField(validators=[EmailValidator])
     def __str__(self):
         return f'ONG: {self.ong_name}'
 

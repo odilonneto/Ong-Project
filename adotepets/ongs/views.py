@@ -29,30 +29,17 @@ class PetDelete(generics.DestroyAPIView):
     def get_queryset(self):
         ong = self.request.ong
         return Pet.objects.filter(ong=ong)
+
+
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
-class ONGView(generics.ListCreateAPIView):
+
+
+class ONGListCreate(generics.ListCreateAPIView):
     queryset = ONG.objects.all()
     serializer_class = ONGSerializer
+    permission_classes = [AllowAny]
 
 
-def index(request):
-    all_ongs_list = ONG.objects.all()
-    context = { "all_ongs_list": all_ongs_list }
-    return render(request, "ongs/index.html", context)
-def detail(request, ong_name):
-    ong = get_object_or_404(ONG, ong_name=ong_name)
-    return render(request, "ongs/detail.html", {"ong" : ong})
-
-
-def pets_available(request, ong_name):
-    ong = get_object_or_404(ONG, ong_name = ong_name)
-    pets = get_list_or_404(Pet, ong_id = ong.id)
-    return render(request, "ongs/pets_available.html", {"pets" : pets})
-
-
-def pet_x(request, ong_name, pet_id):
-    pet = get_object_or_404(Pet, id = pet_id)
-    return render(request, "ongs/pet.html", {"pet": pet})

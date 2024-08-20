@@ -1,0 +1,7 @@
+
+/env
+*.pyc
+/adotepets/adotepets/__pycache__
+*.pyc
+adotepets/adotepets/__pycache__/urls.cpython-312.pyc
+/adotepets/adotepets/__pycache__
