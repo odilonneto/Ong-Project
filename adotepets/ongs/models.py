@@ -62,6 +62,13 @@ def email_validator(email):
         raise ValidationError('%s is not a valid email.' % email)
 
 
+class CustomerUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    genders = (("M", "Man"), ("W", "Woman"), ("O", "Other"))
+    birth_date = models.DateField()
+    gender = models.CharField(max_length=1, choices=genders)
+    user_cpf = models.CharField(max_length=20)
+
 class ONG(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     ong_name = models.CharField(max_length=40)
