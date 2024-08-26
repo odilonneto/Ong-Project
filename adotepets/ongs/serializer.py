@@ -1,6 +1,32 @@
 from rest_framework import serializers
 from .models import *
 from django.contrib.auth.models import User
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import get_user_model
+from .models import ONG, CustomerUser
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims based on the user model
+        try:
+            ong = user.ong
+            token['cnpj'] = ong.ong_cnpj
+        except ONG.DoesNotExist:
+            pass
+
+        try:
+            customer_user = user.customeruser
+            token['cpf'] = customer_user.user_cpf
+        except CustomerUser.DoesNotExist:
+            pass
+
+        return token
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,6 +36,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
+        user.save()
         return user
 
 class ONGSerializer(serializers.ModelSerializer):
@@ -26,8 +53,16 @@ class ONGSerializer(serializers.ModelSerializer):
         ong.save()
         return ong
 
+
 class PetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
         fields = ["ong", "pet_name", "pet_age", "pet_vaccines", "pet_size", "is_pet_neutered",
                   "is_pet_available", "pet_photos"]
+        extra_kwargs = {"ong": {"read_only": True}}
+
+class UserIsOngSerializer(serializers.ModelSerializer):
+    user = UserSerializer(many=False)
+    class Meta:
+        model = ONG
+        fields = ["ong_cnpj"]

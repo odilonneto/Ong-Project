@@ -8,7 +8,13 @@ from .serializer import *
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
 
 class PetList(generics.ListAPIView):
     serializer_class = PetSerializer
@@ -51,12 +57,5 @@ class ONGRegister(generics.CreateAPIView):
     serializer_class = ONGSerializer
     permission_classes = [AllowAny]
 
-class UserIsOng(APIView):
-    def get(self, request):
-        username = self.request.data['username']
-        user_id = User.objects.filter(username=username)[0].id
-        user_exists = ONG.objects.filter(user_id=user_id).exists()
-        return Response(
-            data={'message': user_exists}
-        )
+
 
