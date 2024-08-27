@@ -57,5 +57,14 @@ class ONGRegister(generics.CreateAPIView):
     serializer_class = ONGSerializer
     permission_classes = [AllowAny]
 
+class GetOngs(generics.ListAPIView):
+    queryset = ONG.objects.all()
+    serializer_class = ONGSerializer
+    permission_classes = [AllowAny]
+
+class CustomerUserRegister(generics.CreateAPIView):
+    queryset = CustomerUser.objects.all()
+    serializer_class = CustomerUserSerializer
+    permission_classes = [AllowAny]
 
 

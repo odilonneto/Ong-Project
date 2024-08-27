@@ -10,4 +10,6 @@ urlpatterns = [
     path("register/", views.ONGRegister.as_view(), name="ong-create"),
     path("login/", views.CustomTokenObtainPairView.as_view(), name="ong-login"),
     path("pets/list", views.PetList.as_view(), name="pet-list"),
+    path("all_ongs", views.GetOngs.as_view(), name="get-ongs"),
+    path("customer/register", views.CustomerUserRegister.as_view(), name='register-customer')
 ]
