@@ -18,25 +18,26 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 
 class PetList(generics.ListAPIView):
     serializer_class = PetSerializer
-    permission_classes = [AllowAny]
+    authentication_classes = [JWTAuthentication, ]
+    permission_classes = [IsAuthenticated, ]
     def get_queryset(self):
-        ong = self.request.ong
-        return Pet.objects.filter(ong=ong)
+        user = self.request.user
+        ong = ONG.objects.get(user=user)
+        pets = Pet.objects.filter(ong=ong)
+        return pets
 
 
 class PetCreate(generics.CreateAPIView):
     serializer_class = PetSerializer
+    authentication_classes = [JWTAuthentication, ]
     permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        ong = self.request.ong
-        return Pet.objects.filter(ong=ong)
-
-    def perform_crate(self, serializer):
+    def perform_create(self, serializer):
+        print(self.request.data)
         if serializer.is_valid():
-            serializer.save(ong=self.request.ong)
-        else:
+            ong_id = ONG.objects.get(user=self.request.user).id
+            serializer.save(ong_id=ong_id)
             print(serializer.errors)
+        print(serializer.errors)
 
 class PetDelete(generics.DestroyAPIView):
     serializer_class = PetSerializer

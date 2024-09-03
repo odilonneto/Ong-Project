@@ -64,7 +64,7 @@ class PetSerializer(serializers.ModelSerializer):
         model = Pet
         fields = ["ong", "pet_name", "pet_age", "pet_vaccines", "pet_size", "is_pet_neutered",
                   "is_pet_available", "pet_photos"]
-        extra_kwargs = {"ong": {"read_only": True}}
+        read_only_fields = ["ong"]
 
 
 class CustomerUserSerializer(serializers.ModelSerializer):

@@ -86,14 +86,20 @@ class ONG(models.Model):
         return f'ONG: {self.ong_name}'
 
 
+def file_location(instance, filename, **kwargs):
+    file_path = f"images/{instance.pet_name}-{filename}"
+    return file_path
+
+
 class Pet(models.Model):
     ong = models.ForeignKey(ONG, on_delete=models.CASCADE)
     pet_name = models.CharField(max_length=200)
     pet_age = models.IntegerField()
     pet_vaccines = models.CharField(max_length=400)
-    pet_size = models.CharField(max_length=1)
+    size_choices = (('P', 'Pequeno'), ('M', 'Medio'), ('G','Grande'))
+    pet_size = models.CharField(max_length=1, choices=size_choices)
     is_pet_neutered = models.BooleanField()
     is_pet_available = models.BooleanField(default=True)
-    pet_photos = models.ImageField(upload_to = 'images/')
+    pet_photos = models.ImageField(upload_to=file_location)
     def __str__(self):
         return f'Pet: {self.pet_name}'

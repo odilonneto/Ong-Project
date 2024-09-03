@@ -1,8 +1,8 @@
 import OngRegisterForm from "../components/OngRegisterForm"
 
 
-function Register() {
+function OngRegister() {
     return <OngRegisterForm/>
 }
 
-export default Register
+export default OngRegister
