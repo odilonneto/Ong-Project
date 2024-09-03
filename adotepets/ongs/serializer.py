@@ -62,7 +62,7 @@ class ONGSerializer(serializers.ModelSerializer):
 class PetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pet
-        fields = ["ong", "pet_name", "pet_age", "pet_vaccines", "pet_size", "is_pet_neutered",
+        fields = ["ong", "id", "pet_name", "pet_age", "pet_vaccines", "pet_size", "is_pet_neutered",
                   "is_pet_available", "pet_photos"]
         read_only_fields = ["ong"]
 

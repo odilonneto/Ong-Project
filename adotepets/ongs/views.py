@@ -24,6 +24,7 @@ class PetList(generics.ListAPIView):
         user = self.request.user
         ong = ONG.objects.get(user=user)
         pets = Pet.objects.filter(ong=ong)
+        print(pets)
         return pets
 
 

@@ -1,8 +1,10 @@
+import pdb
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from  django.core.validators import EmailValidator
 from django.contrib.auth.models import User
-
+from datetime import datetime
 
 invalid_characters = ['!', '@', '#', '$', '%', '¨¨', '(', ')', '=', '+', '/', '?', ',', ':', ';', '"', '[', ']', '.']
 
@@ -87,7 +89,7 @@ class ONG(models.Model):
 
 
 def file_location(instance, filename, **kwargs):
-    file_path = f"images/{instance.pet_name}-{filename}"
+    file_path = f"static/images/{instance.pet_name}-{str(datetime.now())}{filename}"
     return file_path
 
 
@@ -101,5 +103,6 @@ class Pet(models.Model):
     is_pet_neutered = models.BooleanField()
     is_pet_available = models.BooleanField(default=True)
     pet_photos = models.ImageField(upload_to=file_location)
+
     def __str__(self):
-        return f'Pet: {self.pet_name}'
+        return f'PET: {self.pet_name} URL: {self.pet_photos}'
