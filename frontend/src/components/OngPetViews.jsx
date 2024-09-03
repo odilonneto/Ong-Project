@@ -1,3 +1,5 @@
+/*
+
 import React, { useEffect, useState } from 'react';
 import api from '../api';
 
@@ -56,3 +58,29 @@ function PetList({ ongId }) {
 }
 
 export default ONGList;
+
+*/
+
+// src/pages/ONGPetsPage.jsx
+// src/components/ONGPetsPage.jsx
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import PetList from './PetList';
+
+function ONGPetsPage() {
+  const { ong_id } = useParams(); // Certifique-se de capturar o nome correto
+
+  if (!ong_id) {
+    console.error('ONG ID is undefined');
+    return <p>Erro ao capturar o ID da ONG.</p>;
+  }
+
+  return (
+    <div>
+      <h1>Pets da ONG</h1>
+      <PetList ongId={ong_id} />
+    </div>
+  );
+}
+
+export default ONGPetsPage;
