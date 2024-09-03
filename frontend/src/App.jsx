@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import OngProtectedRoute from "./components/OngProtectedRoute";
 import UserRegisterForm from "./components/UserRegisterForm";
+import ONGList from "./components/OngPetViews";
+
 
 function Logout(){
   localStorage.clear()
@@ -30,6 +32,7 @@ function App() {
         <Route path="/register/ong" element={<OngRegister />} />
         <Route path="/register/user" element={<UserRegisterForm />} />
         <Route path="*" element={<NotFound />}></Route>
+        <Route path="/viewOng" element={<ONGList />}></Route>
       </Routes>
     </BrowserRouter>
   )
