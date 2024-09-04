@@ -17,7 +17,7 @@ function Pet({ pet, onDelete, onEdit }) {
             ) : (
                 <>
                     <p className="pet-name">{pet.pet_name}</p>
-                    <i className="fas fa-paw"></i>
+                    <i class="fas fa-paw"></i>
                     <p className="pet-content">
                         Idade: {pet.pet_age} meses
                     </p>
