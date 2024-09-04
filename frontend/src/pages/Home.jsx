@@ -28,11 +28,11 @@ function Home() {
     };
 
     const deletePet = (id) => {
-        api.delete(`/ongs/pets/delete/${id}/`).then((res) => {
+        api.delete(`/ongs/pets/delete/${id}`).then((res) => {
             if (res.status === 204) alert("Pet deleted!")
             else alert("Failed to delete pet.")
+            getPets();
         }).catch((error) => alert(error));
-        getPets();
     };
 
 
@@ -52,9 +52,8 @@ function Home() {
             .then((res) => {
                 if (res.status === 201) alert("Pet created!");
                 else alert("Failed to make pet.");
+                getPets();
             }).catch((err) => alert(err));
-        getPets();
-        navigate("/");
     };
 
     return <div>

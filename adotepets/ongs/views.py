@@ -42,10 +42,11 @@ class PetCreate(generics.CreateAPIView):
 
 class PetDelete(generics.DestroyAPIView):
     serializer_class = PetSerializer
+    authentication_classes = [JWTAuthentication, ]
     permission_classes = [IsAuthenticated]
     def get_queryset(self):
-        ong = self.request.ong
-        return Pet.objects.filter(ong=ong)
+        ong_id = ONG.objects.get(user=self.request.user).id
+        return Pet.objects.filter(ong_id=ong_id)
 
 
 class CreateUserView(generics.CreateAPIView):
