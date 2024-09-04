@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import "../styles/Form.css"
 
 function UserRegisterForm(){
-    const route = "/ongs/user/register/";
+    const route = "/ongs/customer/register";
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
@@ -55,7 +55,7 @@ function UserRegisterForm(){
 
         <input className="form-input"
         type="text"
-        value={email}
+        value={userEmail}
         onChange={(e) => setUserEmail(e.target.value)}
         placeholder="E-mail"/>
 
@@ -68,21 +68,25 @@ function UserRegisterForm(){
 
         <input className="form-input"
         type="text"
-        value={ongAddress}
-        onChange={(e) => setOngAddress(e.target.value)}
-        placeholder="Endereço"/>
+        value={cpf}
+        onChange={(e) => setCPF(e.target.value)}
+        placeholder="CPF"/>
 
-        <input className="form-input"
-        type="text"
-        value={ongCnpj}
-        onChange={(e) => setOngCnpj(e.target.value)}
-        placeholder="CNPJ"/>
+        <label> 
+        Gênero:
+        <select required onChange={(e) => setGender(e.target.value)}>
+                <option value={"M"}>Homem</option>
+                <option value={"W"}>Mulher</option>
+                <option value={"O"}>Outro</option>
+        </select>
+        </label>
+        <br></br>
 
-        <input className="form-input"
-        type="text"
-        value={ongPhoneNumber}
-        onChange={(e) => setOngPhoneNumber(e.target.value)}
-        placeholder="Telefone"/>
+        <label htmlFor="birth_date">Nascimento:</label>
+
+        <input type="date" id="birth_date" name="trip-start" value={birthDate} min="1900-01-01" max="2006-09-04"
+        onChange={(e) => setBirthDate(e.target.value)}/>
+
 
         <button className="form-button" type="submit">
             Registre-se
