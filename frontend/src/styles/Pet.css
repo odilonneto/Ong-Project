@@ -1,29 +1,106 @@
+body {
+  background-color: #ffffff; 
+  font-family: 'Georgia', serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
 .pet-container {
-    padding: 10px;
-    margin: 20px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  border: 2px solid #1a1a40;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f0f4f8;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.pet-container:hover {
+  transform: translateY(-5px);
+}
+
+.pet-name {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1a1a40;
+  margin: 0;
+  font-family: 'Times New Roman', serif;
+}
+
+.pet-content, .pet-vaccines, .pet-neutered {
+  font-size: 16px;
+  color: #555;
+  margin: 8px 0;
+}
+
+img {
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #1a1a40;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 8px;
+  font-family: 'Georgia', serif;
+}
+
+.delete-button {
+  background-color: #1a1a40;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #151533;
+}
+
+.edit-button {
+  background-color: #eeeeee;
+  color: #1a1a40;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #dddddd;
+}
+
+@media (max-width: 768px) {
+  .pet-container {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
+
   .pet-name {
-    color: #333;
+    font-size: 22px;
   }
-  
-  .pet-content {
-    color: #666;
+
+  .pet-content, .pet-vaccines, .pet-neutered {
+    font-size: 14px;
   }
-  
-  
-  .delete-button {
-    background-color: #f44336; /* Red */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+
+  img {
+    width: 100%;
+    height: auto;
   }
-  
-  .delete-button:hover {
-    background-color: #d32f2f; /* Darker red */
+
+  button {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 8px;
   }
+}
+
+.fas.fa-paw {
+  color: #1a1a40; 
+  font-size: 24px;
+  margin-right: 10px;
+}

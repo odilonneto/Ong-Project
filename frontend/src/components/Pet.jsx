@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import PetForm from "./PetForm";
-import { useState } from "react";
-import "../styles/Pet.css"
+import "../styles/Pet.css";
 
-function Pet({ pet, onDelete, onEdit}) {
+function Pet({ pet, onDelete, onEdit }) {
     const [isEditing, setIsEditing] = useState(false);
-
 
     const handleSubmit = (bodyFormData) => {
         onEdit(pet.id, bodyFormData);
@@ -15,11 +13,20 @@ function Pet({ pet, onDelete, onEdit}) {
     return (
         <div className="pet-container">
             {isEditing ? (
-                <PetForm onSubmit={handleSubmit}></PetForm>
+                <PetForm onSubmit={handleSubmit} />
             ) : (
                 <>
                     <p className="pet-name">{pet.pet_name}</p>
-                    <p className="pet-content">{pet.pet_age}</p>
+                    <i className="fas fa-paw"></i>
+                    <p className="pet-content">
+                        Idade: {pet.pet_age} meses
+                    </p>
+                    <p className="pet-vaccines">
+                        Vacinas: {pet.pet_vaccines}
+                    </p>
+                    <p className="pet-neutered">
+                        Castrado: {pet.is_pet_neutered ? "Sim" : "Não"}
+                    </p>
                     <img src={pet.pet_photos} width="200" height="200" alt="Pet" />
                     <button className="delete-button" onClick={() => onDelete(pet.id)}>
                         Delete
