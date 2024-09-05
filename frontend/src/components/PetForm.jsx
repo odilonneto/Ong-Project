@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import api from "../api";
 
-function PetForm({ onSubmit, petValues }) {
+function PetForm({ onSubmit, pet }) {
     const [petName, setPetName] = useState("");
     const [petAge, setPetAge] = useState("");
     const [petVaccines, setPetVaccines] = useState("");
@@ -10,15 +10,28 @@ function PetForm({ onSubmit, petValues }) {
     const [petAvailable, setPetAvailable] = useState("");
     const [petPhotos, setPetPhotos] = useState("");
 
+    useEffect(() => {
+        if (pet != null){
+        setPetName(pet.pet_name);
+        setPetAge(pet.pet_age);
+        setPetVaccines(pet.pet_vaccines);
+        setPetAvailable(pet.is_pet_available);
+        setPetSize(pet.pet_size);
+        setPetNeutered(pet.is_pet_neutered);
+    }
+}, [pet])
+
     const createFormData = () => {
         var bodyFormData = new FormData();
         bodyFormData.append('pet_name', petName);
         bodyFormData.append('pet_age', petAge);
         bodyFormData.append('is_pet_available', petAvailable);
         bodyFormData.append('is_pet_neutered', petNeutered);
-        bodyFormData.append('pet_photos', petPhotos);
         bodyFormData.append('pet_size', petSize);
         bodyFormData.append('pet_vaccines', petVaccines);
+        if (pet == null){
+            bodyFormData.append('pet_photos', petPhotos);
+        }
         return bodyFormData
     };
 
@@ -78,8 +91,12 @@ function PetForm({ onSubmit, petValues }) {
             </label>
             <br></br>
 
-            <label>Add Image:</label>
-            <input type="file" onChange={(e) => setPetPhotos(e.target.files[0])} />
+            {pet == null ? (
+            <div>
+                <label>Add Image:</label>
+                <input type="file" onChange={(e) => setPetPhotos(e.target.files[0])} />  
+            </div>
+        ) : null} {/* Corrige a condicional para não entrar em loop */}
 
             <input type="submit" value="Submit"></input>
         </form>

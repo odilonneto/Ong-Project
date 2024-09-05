@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import OngProtectedRoute from "./components/OngProtectedRoute";
 import UserRegisterForm from "./components/UserRegisterForm";
 import ONGList from "./components/OngPetViews";
+import EditPage from "./pages/EditPage";
 
 
 function Logout(){
@@ -21,20 +22,22 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/admin"
           element={
             <OngProtectedRoute>
-              <HomePage/>
+              <Home/>
             </OngProtectedRoute>
           }
         />
+
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register/ong" element={<OngRegister />} />
         <Route path="/register/user" element={<UserRegisterForm />} />
         <Route path="*" element={<NotFound />}></Route>
         <Route path="/viewOng" element={<ONGList />}></Route>
-        <Route path="/viewPet" element={<Home />}></Route>
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/edit/ong" element={<OngProtectedRoute> <EditPage /> </OngProtectedRoute>}></Route>
       </Routes>
     </BrowserRouter>
   )

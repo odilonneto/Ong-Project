@@ -77,7 +77,7 @@ class CustomerUser(models.Model):
 class ONG(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     ong_name = models.CharField(max_length=40, unique=True)
-    custom_url = models.CharField(max_length=20, default=str(ong_name).replace(' ', ''), blank=True)
+    custom_url = models.CharField(max_length=20, default=str(ong_name).replace(' ', ''), unique=True)
     ong_address = models.CharField(max_length=200, validators=[validate_address])
     ong_cnpj = models.CharField(blank=True, validators=[validate_cnpj], unique=True)
     ong_phone_number = models.CharField(max_length=12)

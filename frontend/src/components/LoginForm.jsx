@@ -13,7 +13,7 @@ function LoginForm(){
     const navigate = useNavigate();
 
     const handleOngClick = () => {
-        navigate("/register/ong"); // Redireciona para a página de login de ONG
+        navigate("/register/ong");
     };
 
     const handleSubmit = async (e) => {
@@ -24,7 +24,7 @@ function LoginForm(){
             const res = await api.post(route, { username, password })
             localStorage.setItem(ACCESS_TOKEN, res.data.access);
             localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-            navigate("/viewPet")
+            navigate("/admin")
         } catch (error) {
             alert(error)
         } finally {

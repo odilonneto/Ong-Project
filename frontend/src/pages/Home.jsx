@@ -55,6 +55,7 @@ function Home() {
 
     return (
         <div>
+            <div><button onClick={() => navigate("/edit/ong")}> Editar informações</button></div>
             <div>
                 <h2>Pets</h2>
                 {pets.map((pet) => (

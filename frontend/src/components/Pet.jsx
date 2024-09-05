@@ -13,11 +13,11 @@ function Pet({ pet, onDelete, onEdit }) {
     return (
         <div className="pet-container">
             {isEditing ? (
-                <PetForm onSubmit={handleSubmit} />
+                <PetForm onSubmit={handleSubmit} pet={pet} />
             ) : (
                 <>
                     <p className="pet-name">{pet.pet_name}</p>
-                    <i class="fas fa-paw"></i>
+                    <i className="fas fa-paw"></i>
                     <p className="pet-content">
                         Idade: {pet.pet_age} meses
                     </p>
