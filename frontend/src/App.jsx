@@ -2,6 +2,7 @@ import react from "react"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import OngRegister from "./pages/Register";
+import HomePage from "./pages/HomePage";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import OngProtectedRoute from "./components/OngProtectedRoute";
@@ -23,7 +24,7 @@ function App() {
           path="/"
           element={
             <OngProtectedRoute>
-              <Home />
+              <HomePage/>
             </OngProtectedRoute>
           }
         />
@@ -33,6 +34,7 @@ function App() {
         <Route path="/register/user" element={<UserRegisterForm />} />
         <Route path="*" element={<NotFound />}></Route>
         <Route path="/viewOng" element={<ONGList />}></Route>
+        <Route path="/viewPet" element={<Home />}></Route>
       </Routes>
     </BrowserRouter>
   )

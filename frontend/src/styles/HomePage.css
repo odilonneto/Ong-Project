@@ -1,0 +1,81 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f5f5f5; /* Fundo claro */
+}
+
+.logo {
+    width: 450px; /* Tamanho do logo */
+    margin-bottom: 20px; /* Espaçamento abaixo do logo */
+}
+
+.images-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px; /* Espaçamento entre as imagens */
+    margin-bottom: 20px; /* Espaçamento abaixo das imagens */
+}
+
+.image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.round-image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+   
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px; /* Espaçamento entre os botões */
+}
+
+.home-button {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #004aad;
+    border: none;
+    border-radius: 38px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #0056b3; /* Cor ao passar o mouse */
+}
+
+/* Mobile: Manter lado a lado as imagens e botões */
+@media (max-width: 600px) {
+    
+.images-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 110px; /* Espaçamento entre as imagens */
+    margin-bottom: 1px; /* Espaçamento abaixo das imagens */
+}
+
+    .item {
+        align-items: center;
+    }
+
+    .round-image {
+        width: 100px; /* Reduz o tamanho das imagens em telas menores */
+        height: 100px;
+    }
+
+    .home-button {
+        width: 150px; /* Tamanho menor para os botões em telas menores */
+    }
+}

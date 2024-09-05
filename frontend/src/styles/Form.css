@@ -23,7 +23,7 @@
     width: 95%;
     padding: 10px;
     margin: 20px 0;
-    background-color: #007bff;
+    background-color: #004aad;
     color: white;
     border: none;
     border-radius: 4px;
@@ -33,4 +33,19 @@
   
   .form-button:hover {
     background-color: #0056b3;
+  }
+
+  .form2-button {
+    width: 95%;
+    padding: 10px;
+    background-color:white;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .form2-button:hover {
+    color: #004aad;
   }

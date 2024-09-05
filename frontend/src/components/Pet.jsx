@@ -27,7 +27,7 @@ function Pet({ pet, onDelete, onEdit }) {
                     <p className="pet-neutered">
                         Castrado: {pet.is_pet_neutered ? "Sim" : "Não"}
                     </p>
-                    <img src={pet.pet_photos} width="200" height="200" alt="Pet" />
+                    <img className="image1" src={pet.pet_photos} width="200" height="200" alt="Pet" />
                     <button className="delete-button" onClick={() => onDelete(pet.id)}>
                         Delete
                     </button>

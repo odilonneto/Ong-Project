@@ -12,6 +12,9 @@ function LoginForm(){
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    const handleOngClick = () => {
+        navigate("/register/ong"); // Redireciona para a página de login de ONG
+    };
 
     const handleSubmit = async (e) => {
         setLoading(true);
@@ -21,7 +24,7 @@ function LoginForm(){
             const res = await api.post(route, { username, password })
             localStorage.setItem(ACCESS_TOKEN, res.data.access);
             localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-            navigate("/")
+            navigate("/viewPet")
         } catch (error) {
             alert(error)
         } finally {
@@ -49,6 +52,9 @@ function LoginForm(){
             {loading && <LoadingIndicator />}
             <button className="form-button" type="submit">
                 Login
+            </button>
+            <button className="form2-button" onClick={handleOngClick}>
+                    Cadastre-se
             </button>
         </form>
     );
