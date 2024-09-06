@@ -13,5 +13,6 @@ urlpatterns = [
     path("customer/register", views.CustomerUserRegister.as_view(), name='register-customer'),
     path("pets/update/<int:pk>", views.PetUpdate.as_view(), name="pet-update"),
     path("update/<int:pk>", views.ONGUpdate.as_view(), name="ong-update"),
-    path("<int:pk>", views.RetrieveONG.as_view(), name="ong-retrieve")
+    path("<int:pk>", views.ONGRetrieve.as_view(), name="ong-retrieve"),
+    path("delete/<int:pk>", views.ONGDelete.as_view(), name="ong-delete"),
 ]

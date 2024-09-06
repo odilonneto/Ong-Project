@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializer import *
-from rest_framework import generics
+from rest_framework import generics, status
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -20,9 +20,8 @@ class ONGUpdate(generics.UpdateAPIView):
     serializer_class = ONGSerializer
     authentication_classes = [JWTAuthentication, ]
     permission_classes = [IsAuthenticated, ]
-    def get_queryset(self):
-        ongs = ONG.objects.all()
-        return ongs
+    queryset = ONG.objects.all()
+
 
 class PetUpdate(generics.UpdateAPIView):
     serializer_class = PetSerializer
@@ -87,7 +86,20 @@ class CustomerUserRegister(generics.CreateAPIView):
     serializer_class = CustomerUserSerializer
     permission_classes = [AllowAny]
 
-class RetrieveONG(generics.RetrieveAPIView):
+class ONGRetrieve(generics.RetrieveAPIView):
     queryset = ONG.objects.all()
     serializer_class = ONGSerializer
     permission_classes = [AllowAny]
+
+
+class ONGDelete(generics.DestroyAPIView):
+    serializer_class = ONGSerializer
+    authentication_classes = [JWTAuthentication, ]
+    permission_classes = [IsAuthenticated]
+    queryset = ONG.objects.all()
+    def delete(self, request, pk, format=None):
+        ong = ONG.objects.get(id=pk)
+        user = User.objects.get(id=ong.user_id)
+        ong.delete()
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
