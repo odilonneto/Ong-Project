@@ -1,9 +1,11 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import api from "../api"
 import { useNavigate } from "react-router-dom"
+import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
+import { jwtDecode } from "jwt-decode";
 import "../styles/Form.css"
 
-function OngRegisterForm(){
+function OngRegisterForm( {isEditing, header, button_text }){
     const route = "/ongs/register/";
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -14,11 +16,50 @@ function OngRegisterForm(){
     const [ongPhoneNumber, setOngPhoneNumber] = useState("");
     const [ongEmail, setOngEmail] = useState("");
     const [loading, setLoading] = useState(false);
+    const [ongData, setOngData] = useState("");
     const navigate = useNavigate();
+    useEffect(() => {
+        if (isEditing) {
+          const token = localStorage.getItem(ACCESS_TOKEN);
+          if (token) {
+            const decoded = jwtDecode(token);
+            const ong_id = decoded['ong_id'];
+    
+            api.get(`/ongs/${ong_id}`)
+              .then((res) => {
+                setOngData(res.data);
+              })
+              .catch((err) => alert(err));
+          }
+        }
+      }, [isEditing]);
+    
+      useEffect(() => {
+        if (ongData) {
+          setOngEmail(ongData.ong_email || "");
+          setCustomUrl(ongData.custom_url || "");
+          setOngAddress(ongData.ong_address || "");
+          setOngPhoneNumber(ongData.ong_phone_number || "");
+        }
+      }, [ongData]);
+
     const handleSubmit = async (e) => {
         setLoading(true);
         e.preventDefault();
-
+        if (isEditing){
+            try{
+                const res = await api.patch(`/ongs/update/${ongData.id}`, {"custom_url": customUrl, "ong_address": ongAddress,
+                    "ong_phone_number": ongPhoneNumber, "ong_email": ongEmail});
+                navigate("/admin");
+                }
+                catch (error){
+                    alert(error);
+                }
+                finally{
+                    setLoading(false);
+                }
+        }
+        else{
         try{
             const res = await api.post(route, { user: {"username": username, "password": password}, 
             "ong_name": ongName, "custom_url": customUrl, "ong_address": ongAddress, "ong_cnpj": ongCnpj,
@@ -32,33 +73,45 @@ function OngRegisterForm(){
             setLoading(false);
         }
     }
+    }
 
     return <form onSubmit={handleSubmit} className="form-container">
-        <h1>Formulário de Registro</h1>
-        <input className="form-input"
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Usuário"/>
-        
-        <input className="form-input"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Senha"/>
-
+        <h1>{header}</h1>
+        <>{isEditing ? (
+                <></>
+        ) : (
+            <>
+            <input className="form-input"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Usuário"/>
+            
+            <input className="form-input"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Senha"/>
+            </>
+        )}
+        </>
         <input className="form-input"
         type="text"
         value={ongEmail}
         onChange={(e) => setOngEmail(e.target.value)}
         placeholder="E-mail"/>
 
+        <>
+        {isEditing ? (
+                <></>
+        ) : (
         <input className="form-input"
         type="text"
         value={ongName}
         onChange={(e) => setOngName(e.target.value)}
         placeholder="Nome da ong"/>
-        
+        )}
+        </>
         <input className="form-input"
         type="text"
         value={customUrl}
@@ -71,11 +124,16 @@ function OngRegisterForm(){
         onChange={(e) => setOngAddress(e.target.value)}
         placeholder="Endereço"/>
 
-        <input className="form-input"
-        type="text"
-        value={ongCnpj}
-        onChange={(e) => setOngCnpj(e.target.value)}
-        placeholder="CNPJ"/>
+        {isEditing ? (
+                <></>
+        ) : (
+            <input className="form-input"
+            type="text"
+            value={ongCnpj}
+            onChange={(e) => setOngCnpj(e.target.value)}
+            placeholder="CNPJ"/>
+        )}
+
 
         <input className="form-input"
         type="text"
@@ -84,7 +142,7 @@ function OngRegisterForm(){
         placeholder="Telefone"/>
 
         <button className="form-button" type="submit">
-            Registre-se
+            {button_text}
         </button>
     </form>
 }

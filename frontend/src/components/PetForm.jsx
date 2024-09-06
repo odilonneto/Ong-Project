@@ -96,7 +96,9 @@ function PetForm({ onSubmit, pet }) {
                 <label>Add Image:</label>
                 <input type="file" onChange={(e) => setPetPhotos(e.target.files[0])} />  
             </div>
-        ) : null} {/* Corrige a condicional para não entrar em loop */}
+        ) : (
+            <></>
+        )}
 
             <input type="submit" value="Submit"></input>
         </form>

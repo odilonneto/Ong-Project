@@ -16,6 +16,13 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
+class ONGUpdate(generics.UpdateAPIView):
+    serializer_class = ONGSerializer
+    authentication_classes = [JWTAuthentication, ]
+    permission_classes = [IsAuthenticated, ]
+    def get_queryset(self):
+        ongs = ONG.objects.all()
+        return ongs
 
 class PetUpdate(generics.UpdateAPIView):
     serializer_class = PetSerializer
@@ -80,4 +87,7 @@ class CustomerUserRegister(generics.CreateAPIView):
     serializer_class = CustomerUserSerializer
     permission_classes = [AllowAny]
 
-
+class RetrieveONG(generics.RetrieveAPIView):
+    queryset = ONG.objects.all()
+    serializer_class = ONGSerializer
+    permission_classes = [AllowAny]
