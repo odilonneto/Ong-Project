@@ -16,15 +16,17 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         try:
             ong = user.ong
             token['cnpj'] = ong.ong_cnpj
+            token['ong_id'] = ong.id
         except ONG.DoesNotExist:
             pass
 
         try:
             customer_user = user.customeruser
             token['cpf'] = customer_user.user_cpf
+            token['user_id'] = customer_user.id
         except CustomerUser.DoesNotExist:
             pass
-
+        print(token)
         return token
 
 
@@ -45,7 +47,7 @@ class ONGSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ONG
-        fields = ['user', 'ong_name', 'custom_url', 'ong_address', 'ong_cnpj', 'ong_phone_number', 'ong_email']
+        fields = ['user', 'ong_name', 'custom_url', 'ong_address', 'ong_cnpj', 'ong_phone_number', 'ong_email', 'id']
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
