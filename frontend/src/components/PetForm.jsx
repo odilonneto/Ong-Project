@@ -53,7 +53,7 @@ function PetForm({ onSubmit, pet }) {
                 onChange={(e) => setPetName(e.target.value)}>
             </input>
 
-            <label htmlFor="pet age">Age:</label>
+            <label htmlFor="pet age">Age (months):</label>
             <br />
             <input id="pet age" name="pet age" value={petAge} required onChange={(e) => setPetAge(e.target.value)}></input>
             <br />

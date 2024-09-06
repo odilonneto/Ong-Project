@@ -18,16 +18,19 @@ function Pet({ pet, onDelete, onEdit }) {
                 <>
                     <p className="pet-name">{pet.pet_name}</p>
                     <i className="fas fa-paw"></i>
-                    <p className="pet-content">
-                        Idade: {pet.pet_age} meses
-                    </p>
-                    <p className="pet-vaccines">
-                        Vacinas: {pet.pet_vaccines}
-                    </p>
-                    <p className="pet-neutered">
-                        Castrado: {pet.is_pet_neutered ? "Sim" : "Não"}
-                    </p>
-                    <img className="image1" src={pet.pet_photos} width="200" height="200" alt="Pet" />
+                    <div className="pet-details">
+                        <p className="pet-content">
+                            Idade: {pet.pet_age} meses
+                        </p>
+                        <p className="pet-vaccines">
+                            Vacinas: {pet.pet_vaccines}
+                        </p>
+                        <p className="pet-neutered">
+                            Castrado: {pet.is_pet_neutered ? "Sim" : "Não"}
+                        </p>
+                    </div>
+
+                    <img src={pet.pet_photos} width="200" height="200" alt="Pet" />
                     <button className="delete-button" onClick={() => onDelete(pet.id)}>
                         Delete
                     </button>

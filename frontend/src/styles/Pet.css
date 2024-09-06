@@ -1,13 +1,13 @@
 body {
   background-color: #ffffff; 
   font-family: 'Georgia', serif;
-  color: #333;
+  color: #004aad;
   margin: 0;
   padding: 0;
 }
 
 .pet-container {
-  border: 2px solid #1a1a40;
+  border: 2px #004aad;
   border-radius: 8px;
   padding: 16px;
   margin: 16px 0;
@@ -15,7 +15,7 @@ body {
   align-items: center;
   justify-content: space-between;
   background-color: #f0f4f8;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px #004aad;
   transition: transform 0.3s ease;
 }
 
@@ -26,7 +26,7 @@ body {
 .pet-name {
   font-size: 26px;
   font-weight: bold;
-  color: #1a1a40;
+  color: #004aad;
   margin: 0;
   font-family: 'Times New Roman', serif;
 }
@@ -40,7 +40,7 @@ body {
 .image1 {
   border-radius: 8px;
   object-fit: cover;
-  border: 2px solid #1a1a40;
+  border: 2px solid #004aad;
 }
 
 button {
@@ -54,18 +54,18 @@ button {
 }
 
 .delete-button {
-  background-color: #1a1a40;
+  background-color: #004aad;
   color: white;
   transition: background-color 0.3s ease;
 }
 
 .delete-button:hover {
-  background-color: #151533;
+  background-color: #004aad;
 }
 
 .edit-button {
-  background-color: #eeeeee;
-  color: #1a1a40;
+  background-color: #004aad;
+  color: white;
   transition: background-color 0.3s ease;
 }
 
@@ -100,7 +100,8 @@ button {
 }
 
 .fas.fa-paw {
-  color: #1a1a40; 
+  color: #004aad; 
   font-size: 24px;
   margin-right: 10px;
 }
+
