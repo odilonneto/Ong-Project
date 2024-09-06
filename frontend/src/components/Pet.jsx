@@ -10,6 +10,13 @@ function Pet({ pet, onDelete, onEdit }) {
         setIsEditing(false);
     };
 
+    const handleDelete = () => {
+        const confirmation = window.confirm("Tem certeza de que deseja excluir este pet?");
+        if (confirmation) {
+            onDelete(pet.id);
+        }
+    };
+
     return (
         <div className="pet-container">
             {isEditing ? (
@@ -31,7 +38,7 @@ function Pet({ pet, onDelete, onEdit }) {
                     </div>
 
                     <img src={pet.pet_photos} width="200" height="200" alt="Pet" />
-                    <button className="delete-button" onClick={() => onDelete(pet.id)}>
+                    <button className="delete-button" onClick={handleDelete}>
                         Delete
                     </button>
                     <button className="edit-button" onClick={() => setIsEditing(true)}>

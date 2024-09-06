@@ -10,15 +10,27 @@ function EditPage(){
     const navigate = useNavigate();
     const handleOngDelete = async (e) => {
         e.preventDefault();
+
+        // Exibir uma mensagem de confirmação antes de deletar
+        const confirmation = window.confirm("Tem certeza de que deseja excluir o perfil? Esta ação não pode ser desfeita.");
+
+        if (!confirmation) {
+            // Se o usuário clicar em "Cancelar", não faz nada e retorna
+            return;
+        }
+
         setLoading(true);
             try{
                 const token = localStorage.getItem(ACCESS_TOKEN);
                 const decoded = jwtDecode(token);
                 const ong_id = decoded['ong_id'];
                 const res = await api.delete(`/ongs/delete/${ong_id}`);
+                // Mensagem de sucesso após a exclusão (opcional)
+                alert("Perfil excluído com sucesso.");
+
                 }
                 catch (error){
-                    alert(error);
+                    alert("Erro ao excluir perfil: " + error);
                 }
                 finally{
                     setLoading(false);

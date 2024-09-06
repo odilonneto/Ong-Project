@@ -4,11 +4,11 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #f5f5f5; /* Fundo claro */
+    background-color: whitesmoke; /* Fundo claro */
 }
 
 .logo {
-    width: 450px; /* Tamanho do logo */
+    width: 350px; /* Tamanho do logo */
     margin-bottom: 20px; /* Espaçamento abaixo do logo */
 }
 
