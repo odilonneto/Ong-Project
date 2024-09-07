@@ -1,6 +1,7 @@
 from django.urls import path, include
 from . import views
 from .views import CustomTokenObtainPairView
+from .views import PetListByOngView
 
 urlpatterns = [
     path("pets/delete/<int:pk>", views.PetDelete.as_view(), name="pet-delete"),
@@ -15,4 +16,5 @@ urlpatterns = [
     path("update/<int:pk>", views.ONGUpdate.as_view(), name="ong-update"),
     path("<int:pk>", views.ONGRetrieve.as_view(), name="ong-retrieve"),
     path("delete/<int:pk>", views.ONGDelete.as_view(), name="ong-delete"),
+    path('ong/<int:ong_id>/', PetListByOngView.as_view(), name='pets-by-ong'),
 ]

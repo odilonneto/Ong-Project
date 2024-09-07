@@ -32,6 +32,16 @@ class PetUpdate(generics.UpdateAPIView):
         ong = ONG.objects.get(user=user)
         pets = Pet.objects.filter(ong=ong)
         return pets
+    
+class PetListByOngView(APIView):
+    def get(self, request, ong_id, *args, **kwargs):
+        try:
+            ong = ONG.objects.get(id=ong_id)
+            pets = Pet.objects.filter(ong=ong)  # Filtrar pets pela ONG
+            serializer = PetSerializer(pets, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except ONG.DoesNotExist:
+            return Response({'error': 'ONG não encontrada'}, status=status.HTTP_404_NOT_FOUND)
 
 class PetList(generics.ListAPIView):
     serializer_class = PetSerializer

@@ -11,7 +11,7 @@ function HomePage() {
     const navigate = useNavigate(); // Para redirecionar ao clicar nos botões
 
     const handleUserClick = () => {
-        navigate("/viewOng"); // Redireciona para a página de adoção
+        navigate("/ongs"); // Redireciona para a página de adoção
     };
 
     const handleOngClick = () => {
@@ -20,27 +20,29 @@ function HomePage() {
 
     return (
         <div className="home-container">
-            {/* Logo centralizado */}
-            <img src={logo} alt="Logo" className="logo" />
+             <div className="center-column">
+                {/* Logo centralizado */}
+                <img src={logo} alt="Logo" className="logo" />
 
-            {/* Imagens redondas */}
-            <div className="images-container">
-                <div className="image-wrapper">
-                    <img src={userImage} alt="Usuário" className="round-image" />
+                {/* Imagens redondas */}
+                <div className="images-container">
+                    <div className="image-wrapper">
+                        <img src={userImage} alt="Usuário" className="round-image" />
+                    </div>
+                    <div className="image-wrapper">
+                        <img src={ongImage} alt="ONG" className="round-image" />
+                    </div>
                 </div>
-                <div className="image-wrapper">
-                    <img src={ongImage} alt="ONG" className="round-image" />
-                </div>
-            </div>
 
-            {/* Botões */}
-            <div className="buttons-container">
-                <button className="home-button" onClick={handleUserClick}>
-                    Sou usuário, quero adotar
-                </button>
-                <button className="home-button" onClick={handleOngClick}>
-                    Sou ONG, quero administrar
-                </button>
+                {/* Botões */}
+                <div className="buttons-container">
+                    <button className="home-button" onClick={handleUserClick}>
+                        Sou usuário, quero adotar
+                    </button>
+                    <button className="home-button" onClick={handleOngClick}>
+                        Sou ONG, quero administrar
+                    </button>
+                </div>
             </div>
         </div>
     );

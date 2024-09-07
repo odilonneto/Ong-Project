@@ -37,7 +37,7 @@ function Pet({ pet, onDelete, onEdit }) {
                         </p>
                     </div>
 
-                    <img src={pet.pet_photos} width="200" height="200" alt="Pet" />
+                    <img  className="image1" src={pet.pet_photos} width="200" height="200" alt="Pet" />
                     <button className="delete-button" onClick={handleDelete}>
                         Delete
                     </button>

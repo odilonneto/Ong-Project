@@ -3,13 +3,35 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-image: url('../assets/fundo.jpg'); /* Substitua com o caminho da sua imagem */
+    background-size:cover; /* Ajusta o tamanho da imagem para cobrir toda a página */
+    background-repeat: repeat;
+    background-position: center; /* Centraliza a imagem */
+    width: 100vw; /* Garante que o contêiner tenha 100% da largura da viewport */
+    height: 100vh; /* Garante que o contêiner ocupe 100% da altura da viewport */
+    margin: 0;
+    padding: 0;
+}
+
+.center-column {
+    display: flex;
+    flex-direction: column; /* Garante que os itens fiquem em coluna */
+    align-items: center;    /* Centraliza horizontalmente os itens */
+    justify-content: center; /* Centraliza verticalmente os itens */
+    width: 45vw; /* Controla a largura da coluna, ajuste para o tamanho desejado (aqui, 60% da largura da viewport) */
     min-height: 100vh;
-    background-color: whitesmoke; /* Fundo claro */
+    background-color: rgba(255, 255, 255, 0.7); /* Fundo branco com transparência */
+    backdrop-filter: blur(11px); /* Desfoque no fundo */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box;
+    border-radius: 0px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade */
 }
 
 .logo {
     width: 350px; /* Tamanho do logo */
     margin-bottom: 20px; /* Espaçamento abaixo do logo */
+
 }
 
 .images-container {
@@ -18,6 +40,7 @@
     align-items: center;
     gap: 50px; /* Espaçamento entre as imagens */
     margin-bottom: 20px; /* Espaçamento abaixo das imagens */
+    background-size: contain;
 }
 
 .image-wrapper {
@@ -56,13 +79,13 @@
 }
 
 /* Mobile: Manter lado a lado as imagens e botões */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     
 .images-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 110px; /* Espaçamento entre as imagens */
+    gap: 50px; /* Espaçamento entre as imagens */
     margin-bottom: 1px; /* Espaçamento abaixo das imagens */
 }
 
@@ -71,11 +94,14 @@
     }
 
     .round-image {
-        width: 100px; /* Reduz o tamanho das imagens em telas menores */
-        height: 100px;
+        width: 150px; /* Reduz o tamanho das imagens em telas menores */
+        height: 150px;
     }
 
     .home-button {
         width: 150px; /* Tamanho menor para os botões em telas menores */
+    }
+    .center-column {
+        width: 50vw; /* Ajusta a largura para telas menores */
     }
 }
