@@ -1,0 +1,147 @@
+.PetBody{
+  background-image: url('../assets/fundo.jpg'); /* Substitua com o caminho da sua imagem */
+  background-size: cover;      /* Faz a imagem cobrir toda a tela */
+  background-repeat: repeat;   /* Repete a imagem se a página for maior que a imagem */
+  background-attachment: fixed; /* Mantém a imagem fixa no lugar ao rolar */
+  background-position: center;  /* Centraliza a imagem no fundo */
+  min-height: 100vh;            /* Garante que o corpo da página tenha no mínimo a altura total da janela */
+  margin: 0;                    /* Remove margens para evitar deslocamento */
+  padding: 0;
+}
+
+.pet-container {
+  border: 2px #004aad;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px ;
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+  background-color: #f0f4f8;
+  box-shadow: 0 4px 10px #004aad;
+  transition: transform 0.3s ease;
+}
+
+.Upper{
+  font-size: 24px;
+  display: flex;
+    flex-direction:column ; /* Garante que os itens fiquem em coluna */
+    align-items: center;    /* Centraliza horizontalmente os itens */
+    justify-content: center; /* Centraliza verticalmente os itens */
+    width: 100vw; /* Controla a largura da coluna, ajuste para o tamanho desejado (aqui, 60% da largura da viewport) */
+    min-height:fit-content;
+    background-color: rgba(255, 255, 255, 0.7); /* Fundo branco com transparência */
+    backdrop-filter: blur(15px); /* Desfoque no fundo */
+    padding: 0%; /* Espaçamento interno */
+    box-sizing:content-box;
+    border-radius: 0px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade */
+}
+
+.pet-container:hover {
+  transform: translateY(-5px);
+}
+
+.hnome{
+  margin-bottom: 0;
+}
+.hpets{
+  margin-top: 0.9px;
+}
+
+.pet-name {
+  font-size: 26px;
+  font-weight: bold;
+  color: #004aad;
+  margin: 0;
+  font-family: 'Times New Roman', serif;
+}
+
+.pet-content, .pet-vaccines, .pet-neutered {
+  font-size: 16px;
+  color: #555;
+  margin: 8px 0;
+}
+
+.image1 {
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #004aad;
+}
+
+.footer {
+  display: flex;
+  flex-direction:column;
+  align-items: center;    /* Centraliza horizontalmente os itens */
+  justify-content: center;
+  font-size: 16px;
+  min-height:100px;
+  width: 100vw;
+  color: white;
+  background-color: #004aad;
+  margin-top: 50px;
+}
+
+.gostou{
+  margin-bottom: 0px;
+  font-size: 20px;
+}
+
+.contato{
+  margin-bottom: 0;
+}
+
+.email{
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+
+.buttons-container1 button {
+    width: 200px;
+    padding: 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #004aad;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttons-ped{
+  display: flex;
+  align-items: flex-end;    /* Centraliza horizontalmente os itens */
+  justify-content: flex-end;
+  width: 100vw;
+  background-color: #004aad;
+}
+
+.buttons-container1 button:hover{
+  background-color: #5e85ae; /* Cor ao passar o mouse */
+}
+
+
+@media (max-width: 768px) {
+  .pet-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pet-name {
+    font-size: 22px;
+  }
+
+  .pet-content, .pet-vaccines, .pet-neutered {
+    font-size: 14px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+.fas.fa-paw {
+  color: #004aad; 
+  font-size: 24px;
+  margin-right: 10px;
+}}

@@ -33,6 +33,7 @@ function LoginForm(){
     };
 
     return (
+        <div className="bodylogin">
         <form onSubmit={handleSubmit} className="form-container">
             <h1>Login</h1>
             <input
@@ -57,6 +58,7 @@ function LoginForm(){
                     Cadastre-se
             </button>
         </form>
+        </div>
     );
 }
 export default LoginForm;

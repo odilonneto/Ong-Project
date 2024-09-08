@@ -1,14 +1,31 @@
-.form-container {
+.bodylogin{
+    background-image: url('../assets/fundo.jpg'); /* Substitua com o caminho da sua imagem */
+    background-size: cover;      /* Faz a imagem cobrir toda a tela */
+    background-repeat: repeat;   /* Repete a imagem se a página for maior que a imagem */
+    background-attachment: fixed; /* Mantém a imagem fixa no lugar ao rolar */
+    background-position: center;  /* Centraliza a imagem no fundo */
+    min-height: 100vh;            /* Garante que o corpo da página tenha no mínimo a altura total da janela */
+    margin: 0;                    /* Remove margens para evitar deslocamento */
+    padding: 0;
+    display: flex;
+    justify-content: center;      /* Centraliza horizontalmente */
+    align-items: center;          /* Centraliza verticalmente */
+  }
+  
+  .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 300px;
     margin: 50px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
     max-width: 400px;
   }
+
+  
   
   .form-input {
     width: 90%;
@@ -20,7 +37,7 @@
   }
   
   .form-button {
-    width: 95%;
+    width: 90%;
     padding: 10px;
     margin: 20px 0;
     background-color: #004aad;
