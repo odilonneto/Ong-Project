@@ -132,8 +132,11 @@ class CreateRatingView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         print(self.request.data)
-        user = self.request.user.id
+        user = self.request.data['customer_id']
         ong_id = self.request.data['ong_id']
+        user_is_customer = CustomerUser.objects.filter(id=user)
+        if len(user_is_customer) < 1:
+            raise ValidationError({'error': 'A conta logada não pertence a um usuário.'})
         rating_already_exists = Rating.objects.filter(user_id=user, ong=ong_id)
         if len(rating_already_exists) > 0:
             raise ValidationError({'error': 'Usuário já possui uma avaliação para esta ONG.'})

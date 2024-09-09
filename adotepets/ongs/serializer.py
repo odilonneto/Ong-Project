@@ -23,9 +23,10 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         try:
             customer_user = user.customeruser
             token['cpf'] = customer_user.user_cpf
-            token['user_id'] = customer_user.id
+            token['customer_id'] = customer_user.id
         except CustomerUser.DoesNotExist:
             pass
+        print(token)
         return token
 
 

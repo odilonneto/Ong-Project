@@ -41,7 +41,7 @@ function PetList( {ong} ) {
         try{
             const token = localStorage.getItem(ACCESS_TOKEN)
             const decoded = jwtDecode(token);
-            const user_id = decoded["user_id"];
+            const user_id = decoded["customer_id"];
             try {
                 await api.post("ongs/ratings/create", {
                     "ong_id": ong.id,
