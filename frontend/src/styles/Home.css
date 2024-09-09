@@ -149,3 +149,11 @@ form .form-group {
     font-size: 16px;
   }
 }
+.Nome {
+  text-align: left; /* Garante o alinhamento à esquerda do texto */
+  color: white;
+  margin-left: 0; /* Remove qualquer margem à esquerda */
+  padding-left: 20px; /* Ajuste se precisar de um espaçamento da borda esquerda */
+  flex-grow: 1; /* Faz com que o nome ocupe todo o espaço disponível à esquerda */
+}
+
