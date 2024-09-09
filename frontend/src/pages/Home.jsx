@@ -44,6 +44,7 @@ function Home() {
     return (
         <div className="bodyhome">
             <div className="cabecaButton">
+            <h3 className="Nome">Nomeong</h3>
                 <div><button onClick={() => navigate("/create/pet")}> Cadastrar Pet </button></div>
                 <div><button onClick={() => navigate("/edit/ong")}> Editar informações</button></div>
                 <button onClick={handleHomeClick}>Home</button>
