@@ -5,6 +5,7 @@ import OngRegisterForm from "../components/OngRegisterForm";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
 import { jwtDecode } from "jwt-decode";
 
+
 function EditPage(){
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -37,9 +38,9 @@ function EditPage(){
                     navigate("/logout");
                 }
     }
-    return(<div>
+    return(<div className="bodylogin">
         <OngRegisterForm header="Informações" button_text="Salvar alterações" isEditing={true}></OngRegisterForm>
-        <button onClick={handleOngDelete}> Excluir Perfil </button>
+        <button className="excluir" onClick={handleOngDelete}> Excluir Perfil </button>
         </div>)
 }
 export default EditPage;

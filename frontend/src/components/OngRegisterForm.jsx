@@ -75,7 +75,9 @@ function OngRegisterForm( {isEditing, header, button_text }){
     }
     }
 
-    return <form onSubmit={handleSubmit} className="form-container">
+    return(
+    <div className="bodylogin">
+    <form onSubmit={handleSubmit} className="form-container">
         <h1>{header}</h1>
         <>{isEditing ? (
                 <></>
@@ -145,6 +147,7 @@ function OngRegisterForm( {isEditing, header, button_text }){
             {button_text}
         </button>
     </form>
-}
+    </div>
+)}
 
 export default OngRegisterForm

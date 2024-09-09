@@ -45,7 +45,9 @@ function PetList() {
             </div>
             <div className="Upper">
                 <h1 className="hnome">{ongName}</h1> {/* Exibe o nome da ONG */}
-                {pets.length > 0 ? (<h4 className="hpets">Pets disponíveis para adoção:</h4>) : (<h4 className="hpets">Esta ONG ainda não tem pets disponíveis para adoção.</h4>)}
+                {pets.length > 0 ? (<h4 className="hpets">Pets disponíveis para adoção:</h4>) : (<div className="no-pets-message">
+                <h4 className="hpets">Esta ONG ainda não tem pets disponíveis para adoção.</h4>
+            </div>)}
                 
             </div>
 
@@ -64,7 +66,7 @@ function PetList() {
                     ))}
                 </ul>
 
-            {/* Frase no final da página */}
+            
             <footer className="footer">
                 <h4 className="gostou">Gostou de algum Pet e deseja adotar? Entre em contato com nossa ONG!</h4>
                 <p className="contato">Telefone: {ongContact.phone}</p>

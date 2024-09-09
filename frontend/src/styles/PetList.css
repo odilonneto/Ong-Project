@@ -1,11 +1,13 @@
 .PetBody{
-  background-image: url('../assets/fundo.jpg'); /* Substitua com o caminho da sua imagem */
-  background-size: cover;      /* Faz a imagem cobrir toda a tela */
-  background-repeat: repeat;   /* Repete a imagem se a página for maior que a imagem */
-  background-attachment: fixed; /* Mantém a imagem fixa no lugar ao rolar */
-  background-position: center;  /* Centraliza a imagem no fundo */
-  min-height: 100vh;            /* Garante que o corpo da página tenha no mínimo a altura total da janela */
-  margin: 0;                    /* Remove margens para evitar deslocamento */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o corpo ocupe pelo menos 100% da altura da tela */
+  background-image: url('../assets/fundo.jpg'); 
+  background-size: cover;
+  background-repeat: repeat;  
+  background-attachment: fixed;
+  background-position: center;  
+  margin: 0;
   padding: 0;
 }
 
@@ -23,8 +25,8 @@
 }
 
 .Upper{
-  font-size: 24px;
-  display: flex;
+    font-size: 24px;
+    display: flex;
     flex-direction:column ; /* Garante que os itens fiquem em coluna */
     align-items: center;    /* Centraliza horizontalmente os itens */
     justify-content: center; /* Centraliza verticalmente os itens */
@@ -70,16 +72,11 @@
 }
 
 .footer {
-  display: flex;
-  flex-direction:column;
-  align-items: center;    /* Centraliza horizontalmente os itens */
-  justify-content: center;
-  font-size: 16px;
-  min-height:100px;
-  width: 100vw;
-  color: white;
-  background-color: #004aad;
-  margin-top: 50px;
+    margin-top: auto; /* Empurra o rodapé para o final */
+    background-color: #004aad;
+    color: white;
+    text-align: center;
+    padding: 20px;
 }
 
 .gostou{

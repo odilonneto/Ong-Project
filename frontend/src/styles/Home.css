@@ -1,4 +1,54 @@
+.bodyhome{
+  background-image: url('../assets/fundo.jpg'); /* Substitua com o caminho da sua imagem */
+  background-size: cover;      /* Faz a imagem cobrir toda a tela */
+  background-repeat: repeat;   /* Repete a imagem se a página for maior que a imagem */
+  background-attachment: fixed; /* Mantém a imagem fixa no lugar ao rolar */
+  background-position: center;  /* Centraliza a imagem no fundo */
+  min-height: 100vh;            /* Garante que o corpo da página tenha no mínimo a altura total da janela */
+  margin: 0;                    /* Remove margens para evitar deslocamento */
+  padding: 0;
+}
 
+
+.cabecaButton button{
+    width: 200px;
+    padding: 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #004aad;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cabecaButton{
+  display: flex;
+  align-items: flex-end;    /* Centraliza horizontalmente os itens */
+  justify-content: flex-end;
+  width: 100vw;
+  background-color: #004aad;
+}
+
+.cabecaButton button:hover{
+  background-color: #5e85ae; /* Cor ao passar o mouse */
+}
+
+.Petsh{
+    font-size: 24px;
+    display: flex;
+    flex-direction:column ; /* Garante que os itens fiquem em coluna */
+    align-items: center;    /* Centraliza horizontalmente os itens */
+    justify-content: center; /* Centraliza verticalmente os itens */
+    width: 100vw; /* Controla a largura da coluna, ajuste para o tamanho desejado (aqui, 60% da largura da viewport) */
+    min-height:fit-content;
+    background-color: rgba(255, 255, 255, 0.7); /* Fundo branco com transparência */
+    backdrop-filter: blur(15px); /* Desfoque no fundo */
+    padding: 0%; /* Espaçamento interno */
+    height:90px;
+    margin-top: 0cm;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade */
+}
 
 form {
   background-color: #ffffff;

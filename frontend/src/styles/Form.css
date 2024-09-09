@@ -9,7 +9,8 @@
     padding: 0;
     display: flex;
     justify-content: center;      /* Centraliza horizontalmente */
-    align-items: center;          /* Centraliza verticalmente */
+    align-items: center;   
+    flex-direction: column;       /* Centraliza verticalmente */
   }
   
   .form-container {
@@ -18,10 +19,10 @@
     align-items: center;
     justify-content: center;
     width: 300px;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 1);
     max-width: 400px;
   }
 
@@ -65,4 +66,21 @@
   
   .form2-button:hover {
     color: #004aad;
+  }
+
+  .excluir{
+    width: 150px;
+    padding: 20px;
+    font-size: 16px;
+    color: white;
+    background-color: red;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 0px;
+    margin-bottom: 2cm;
+    border-radius: 4px;
+  }
+
+  .excluir:hover{
+    background-color:crimson;
   }

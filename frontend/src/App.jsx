@@ -7,9 +7,10 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import OngProtectedRoute from "./components/OngProtectedRoute";
 import UserRegisterForm from "./components/UserRegisterForm";
-import ONGList from './components/ONGList';
-import PetList from './components/PetList';
+import ONGList from './pages/ONGList';
+import PetList from './pages/PetList';
 import EditPage from "./pages/EditPage";
+import CreatePet from "./pages/CreatePet"
 
 
 function Logout(){
@@ -40,6 +41,7 @@ function App() {
         <Route path="/edit/ong" element={<OngProtectedRoute> <EditPage /> </OngProtectedRoute>}></Route>
         <Route path="/ongs" element={<ONGList />} />
         <Route path="/pets/:ongId" element={<PetList />} />
+        <Route path="/create/pet" element={<CreatePet />} />
       </Routes>
     </BrowserRouter>
   )

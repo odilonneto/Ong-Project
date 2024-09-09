@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 import Pet from "../components/Pet";
-import PetForm from "../components/PetForm"
 import "../styles/Home.css";
 
 function Home() {
@@ -40,30 +39,21 @@ function Home() {
             .catch((error) => alert(error));
     };
 
-    const createPet = (bodyFormData) => {
-        api.post("/ongs/pets/", bodyFormData)
-        .then((res) => {
-            if (res.status === 201) {
-                alert("Pet created!");
-            } else {
-                alert("Failed to make pet.");
-            }
-            getPets();
-        })
-        .catch((err) => alert(err));
-    }
+    const handleHomeClick = () => navigate('/');
 
     return (
-        <div>
-            <div><button onClick={() => navigate("/edit/ong")}> Editar informações</button></div>
+        <div className="bodyhome">
+            <div className="cabecaButton">
+                <div><button onClick={() => navigate("/create/pet")}> Cadastrar Pet </button></div>
+                <div><button onClick={() => navigate("/edit/ong")}> Editar informações</button></div>
+                <button onClick={handleHomeClick}>Home</button>
+            </div>
             <div>
-                <h2>Pets</h2>
+                {pets.length > 0 ? (<h2 className="Petsh">Pets Cadastrados</h2>) : (<h2 className="Petsh">Ainda não há Pets cadastrados</h2>)}
                 {pets.map((pet) => (
                     <Pet pet={pet} onDelete={deletePet} onEdit={editPet} key={pet.id} />
                 ))}
             </div>
-            <h2>Create a Pet</h2>
-            <PetForm onPetCreated={getPets} onSubmit={createPet} /> {/* Novo componente de formulário */}
         </div>
     );
 }
