@@ -11,7 +11,8 @@ import ONGList from './pages/ONGList';
 import PetList from './pages/PetList';
 import EditPage from "./pages/EditPage";
 import CreatePet from "./pages/CreatePet"
-
+import { useState, useEffect } from "react";
+import api from "./api";
 
 function Logout(){
   localStorage.clear()
@@ -20,6 +21,30 @@ function Logout(){
 
 
 function App() {
+  const [ongs, setOngs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const getOngs = () => {
+    api.get('/ongs/all_ongs')
+      .then(response => response.data)
+      .then(data => {
+        setOngs(data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        alert(err);
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    getOngs();
+  }, []);
+
+  if (isLoading) {
+    return <div>Carregando...</div>;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -31,7 +56,14 @@ function App() {
             </OngProtectedRoute>
           }
         />
-
+              {ongs.map(ong => (
+            <Route 
+                    path={`/ongs/${ong.custom_url}`} 
+                    element={<PetList ong={ong}/>}
+                >
+                </Route>
+              
+      ))}
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register/ong" element={<OngRegister />} />

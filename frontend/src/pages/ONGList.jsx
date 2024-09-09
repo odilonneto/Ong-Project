@@ -12,14 +12,14 @@ function ONGList() {
     }, []);
 
     const getOngs = () => {
-        api.get('/api/pets/all_ongs')
+        api.get('/ongs/all_ongs')
             .then(response => response.data)
             .then(data => setOngs(data))
             .catch(err => alert(err));
     };
 
-    const handleOngClick = (ongId) => {
-        navigate(`/pets/${ongId}`);
+    const handleOngClick = (custom_url) => {
+        navigate(`/ongs/${custom_url}`);
     };
 
     return (
@@ -29,7 +29,7 @@ function ONGList() {
                 <div 
                     key={ong.id} 
                     className="ong-item"
-                    onClick={() => handleOngClick(ong.id)}
+                    onClick={() => handleOngClick(ong.custom_url)}
                 >
                     <h2>{ong.ong_name}</h2>
                 </div>
