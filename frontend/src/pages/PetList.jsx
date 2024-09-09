@@ -3,33 +3,22 @@ import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api';
 import "../styles/PetList.css"; // Importando o CSS para manter o estilo
 
-function PetList() {
-    const { ongId } = useParams();
+function PetList( {ong} ) { 
     const [pets, setPets] = useState([]);
-    const [ongName, setOngName] = useState(''); // Estado para armazenar o nome da ONG
-    const [ongContact, setOngContact] = useState({ email: '', phone: '' }); // Contato da ONG
     const navigate = useNavigate(); // Para navegação
 
     useEffect(() => {
-        if (ongId) {
+        if (ong) {
             // Primeira requisição: busca os pets relacionados à ONG
-            api.get(`/api/pets/ong/${ongId}/`)
+            api.get(`ongs/${ong.id}/pets`)
                 .then(response => response.data)
                 .then(data => {
                     setPets(data);
                 })
                 .catch(err => alert(err));
 
-            // Segunda requisição: busca o nome e contato da ONG pelo ID
-            api.get(`/api/pets/${ongId}`) // Supondo que este endpoint retorne os dados da ONG
-                .then(response => response.data)
-                .then(data => {
-                    setOngName(data.ong_name); // Nome da ONG
-                    setOngContact({ email: data.ong_email, phone: data.ong_phone_number }); // Contato da ONG
-                })
-                .catch(err => alert(err));
         }
-    }, [ongId]);
+    }, [ong]);
 
     // Funções para navegação
     const handleHomeClick = () => navigate('/'); // Voltar para a Home Page
@@ -44,7 +33,7 @@ function PetList() {
             </div>
             </div>
             <div className="Upper">
-                <h1 className="hnome">{ongName}</h1> {/* Exibe o nome da ONG */}
+            <h1 className="hnome">{ong.ong_name}</h1> {/* Exibe o nome da ONG */}
                 {pets.length > 0 ? (<h4 className="hpets">Pets disponíveis para adoção:</h4>) : (<div className="no-pets-message">
                 <h4 className="hpets">Esta ONG ainda não tem pets disponíveis para adoção.</h4>
             </div>)}
@@ -69,8 +58,8 @@ function PetList() {
             
             <footer className="footer">
                 <h4 className="gostou">Gostou de algum Pet e deseja adotar? Entre em contato com nossa ONG!</h4>
-                <p className="contato">Telefone: {ongContact.phone}</p>
-                <p className="email">email: {ongContact.email}</p>
+                <p className="contato">Telefone: {ong.ong_phone_number}</p>
+                <p className="email">email: {ong.ong_email}</p>
             </footer>
         </div>
     );

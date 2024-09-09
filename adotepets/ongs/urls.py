@@ -16,5 +16,5 @@ urlpatterns = [
     path("update/<int:pk>", views.ONGUpdate.as_view(), name="ong-update"),
     path("<int:pk>", views.ONGRetrieve.as_view(), name="ong-retrieve"),
     path("delete/<int:pk>", views.ONGDelete.as_view(), name="ong-delete"),
-    path('ong/<int:ong_id>/', PetListByOngView.as_view(), name='pets-by-ong'),
+    path('<int:ong_id>/pets', PetListByOngView.as_view(), name='pets-by-ong'),
 ]
