@@ -135,7 +135,6 @@ class CreateRatingView(generics.CreateAPIView):
         ong_id = self.request.data['ong_id']
         rating_already_exists = Rating.objects.filter(user_id=user, ong=ong_id)
         if len(rating_already_exists) > 0:
-            print('teste2')
             raise ValidationError({'error': 'Usuário já possui uma avaliação para esta ONG.'})
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

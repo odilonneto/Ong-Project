@@ -109,7 +109,7 @@ class Pet(models.Model):
         return f'PET: {self.pet_name} URL: {self.pet_photos}'
 
 class Rating(models.Model):
-    user = models.OneToOneField(CustomerUser, on_delete=models.CASCADE)
-    ong = models.OneToOneField(ONG, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomerUser, on_delete=models.CASCADE)
+    ong = models.ForeignKey(ONG, on_delete=models.CASCADE)
     comment = models.CharField(max_length=300)
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
