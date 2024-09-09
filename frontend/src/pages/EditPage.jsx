@@ -39,13 +39,11 @@ function EditPage(){
                 }
     }
     return(
-        <div>
-            <Header></Header>
-    <div className="bodylogin">
-        <OngRegisterForm header="Informações" button_text="Salvar alterações" isEditing={true}>        </OngRegisterForm>
-        <button className="excluir" onClick={handleOngDelete}> Excluir Perfil </button>
-
-        </div>
-        </div>)
+    <div>
+        <Header></Header>
+        <div className="bodylogin">
+        <OngRegisterForm header="Informações" button_text="Salvar alterações" isEditing={true}></OngRegisterForm>
+        <button className="excluir" onClick={handleOngDelete}> Excluir Perfil </button></div>
+    </div>)
 }
 export default EditPage;

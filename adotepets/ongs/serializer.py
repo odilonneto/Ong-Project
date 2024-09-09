@@ -90,11 +90,12 @@ class CustomerUserSerializer(serializers.ModelSerializer):
 
 class RatingSerializer(serializers.ModelSerializer):
     user_id = serializers.PrimaryKeyRelatedField(queryset=CustomerUser.objects.all(), source='user')
+    user_name = serializers.CharField(source='user.name', read_only=True)  # Adiciona o nome do usuário
     ong_id = serializers.PrimaryKeyRelatedField(queryset=ONG.objects.all(), source='ong')
 
     class Meta:
         model = Rating
-        fields = ['user_id', 'ong_id', 'comment', 'rating']
+        fields = ['user_id', 'user_name', 'ong_id', 'comment', 'rating']
 
     def create(self, validated_data):
         rating = Rating.objects.create(**validated_data)

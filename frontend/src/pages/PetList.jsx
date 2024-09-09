@@ -108,7 +108,7 @@ function PetList( {ong} ) {
             </div>
             <div className="Upper">
                 <h1 className="hnome">
-                    {ong.ong_name}
+                <h3 className='nameong'>{ong.ong_name}</h3>
                     <div className="rating-header">
                         <div className="stars">
                             {[1, 2, 3, 4, 5].map((star) => (
@@ -137,6 +137,7 @@ function PetList( {ong} ) {
                         <ul>
                             {reviews.map((review, index) => (
                                 <li key={index}>
+                                    <p>{review.user_name}</p>
                                     <div className="stars">
                                         {[1, 2, 3, 4, 5].map((star) => (
                                             <span key={star} className={star <= review.rating ? "star selected" : "star"}>

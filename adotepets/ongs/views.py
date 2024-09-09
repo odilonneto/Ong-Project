@@ -119,6 +119,7 @@ class ONGDelete(generics.DestroyAPIView):
 class OngRatingView(generics.ListAPIView):
     serializer_class = RatingSerializer
     permission_classes = [AllowAny]
+    
     def get_queryset(self):
         ong_id = self.kwargs['ong_id']
         return Rating.objects.filter(ong_id=ong_id)
@@ -138,3 +139,4 @@ class CreateRatingView(generics.CreateAPIView):
             raise ValidationError({'error': 'Usuário já possui uma avaliação para esta ONG.'})
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
