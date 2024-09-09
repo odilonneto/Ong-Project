@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import api from "../api";
 import "../styles/CreatePet.css"
+import { useNavigate } from "react-router-dom";
 
-function PetForm({ onSubmit, pet }) {
+function PetForm({ pet }) {
     const [petName, setPetName] = useState("");
     const [petAge, setPetAge] = useState("");
     const [petVaccines, setPetVaccines] = useState("");
     const [petSize, setPetSize] = useState("");
-    const [petNeutered, setPetNeutered] = useState("");
-    const [petAvailable, setPetAvailable] = useState("");
+    const [petNeutered, setPetNeutered] = useState(true);
+    const [petAvailable, setPetAvailable] = useState(true);
     const [petPhotos, setPetPhotos] = useState("");
-
+    const navigate = useNavigate();
     useEffect(() => {
         if (pet != null){
         setPetName(pet.pet_name);
@@ -39,7 +40,13 @@ function PetForm({ onSubmit, pet }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = createFormData();
-        onSubmit(data);
+        api.post("/ongs/pets/", data)
+        .then((res) => {
+            if (res.status === 201) alert("Pet created!");
+            else alert("Failed to make pet.");
+        }).catch((err) => alert(err));
+        navigate("/admin");
+
     }
     return (
         <div className="bodycreatepet">
