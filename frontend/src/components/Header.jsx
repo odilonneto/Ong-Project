@@ -21,13 +21,14 @@ function Header({}){
         .catch((err) => alert(err));
     }
     const handleHomeClick = () => navigate('/');
-    
+
 return(
     <div className="cabecaButton">
         <h3 className="Nome">{ongData.ong_name}</h3>
         <div><button onClick={() => navigate("/create/pet")}> Cadastrar Pet </button></div>
         <div><button onClick={() => navigate("/edit/ong")}> Editar informações</button></div>
         <button onClick={handleHomeClick}>Home</button>
+        <div><button onClick={() => navigate("/logout")}>Logout</button></div>
     </div>
 );
     }
