@@ -113,3 +113,29 @@ class ONGDelete(generics.DestroyAPIView):
         ong.delete()
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class OngRatingView(generics.ListAPIView):
+    serializer_class = RatingSerializer
+    permission_classes = [AllowAny]
+    def get_queryset(self):
+        ong_id = self.kwargs['ong_id']
+        return Rating.objects.filter(ong_id=ong_id)
+
+
+class CreateRatingView(generics.CreateAPIView):
+    serializer_class = RatingSerializer
+    authentication_classes = [JWTAuthentication, ]
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        user = self.request.user.id
+        if not CustomerUser.objects.filter(user_id=user).exists():
+            return Response({'error': 'Usuário não é um CustomerUser.'}, status=status.HTTP_400_BAD_REQUEST)
+        user = CustomerUser.objects.get(user_id=user)
+        ong_id = self.request.data.get('ong')
+        if Rating.objects.filter(user=user, ong_id=ong_id).exists():
+            return Response({'error': 'Usuário já possui uma avaliação para esta ONG.'},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save(user=user)

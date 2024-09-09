@@ -5,6 +5,7 @@ from django.db import models
 from  django.core.validators import EmailValidator
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 invalid_characters = ['!', '@', '#', '$', '%', '¨¨', '(', ')', '=', '+', '/', '?', ',', ':', ';', '"', '[', ']', '.']
 
@@ -106,3 +107,9 @@ class Pet(models.Model):
 
     def __str__(self):
         return f'PET: {self.pet_name} URL: {self.pet_photos}'
+
+class Rating(models.Model):
+    user = models.OneToOneField(CustomerUser, on_delete=models.CASCADE)
+    ong = models.OneToOneField(ONG, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=300)
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])

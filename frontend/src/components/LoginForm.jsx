@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants"
 import LoadingIndicator from "./LoadingIndicator";
 import "../styles/Form.css"
+import { jwtDecode } from "jwt-decode";
 
 function LoginForm(){
     const route = '/ongs/login/';
@@ -24,7 +25,15 @@ function LoginForm(){
             const res = await api.post(route, { username, password })
             localStorage.setItem(ACCESS_TOKEN, res.data.access);
             localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-            navigate("/admin")
+            const token = localStorage.getItem(ACCESS_TOKEN)
+
+            const decoded = jwtDecode(token);
+            if ("cnpj" in decoded){
+                navigate("/admin")
+            }
+            else if ("cpf" in decoded){
+                navigate("/ongs")
+            }
         } catch (error) {
             alert(error)
         } finally {

@@ -87,3 +87,15 @@ class CustomerUserSerializer(serializers.ModelSerializer):
                                                     user_cpf=validated_data['user_cpf'])
         customer_user.save()
         return customer_user
+
+class RatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        fields = ['ong_id', 'user_id', 'comment', 'rating']
+    def create(self, validated_data):
+        user = CustomerUser.objects.get(id=validated_data['user_id'])
+        ong = ONG.objects.get(id=validated_data['ong_id'])
+        rating = Rating.objects.create(user=user, ong=ong, comment = validated_data['comment'],
+                                       rating = validated_data['rating'])
+        rating.save()
+        return rating
