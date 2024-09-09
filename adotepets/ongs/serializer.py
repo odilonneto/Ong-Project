@@ -26,7 +26,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             token['user_id'] = customer_user.id
         except CustomerUser.DoesNotExist:
             pass
-        print(token)
         return token
 
 
@@ -88,14 +87,15 @@ class CustomerUserSerializer(serializers.ModelSerializer):
         customer_user.save()
         return customer_user
 
+
 class RatingSerializer(serializers.ModelSerializer):
+    user_id = serializers.PrimaryKeyRelatedField(queryset=CustomerUser.objects.all(), source='user')
+    ong_id = serializers.PrimaryKeyRelatedField(queryset=ONG.objects.all(), source='ong')
+
     class Meta:
         model = Rating
-        fields = ['ong_id', 'user_id', 'comment', 'rating']
+        fields = ['user_id', 'ong_id', 'comment', 'rating']
+
     def create(self, validated_data):
-        user = CustomerUser.objects.get(id=validated_data['user_id'])
-        ong = ONG.objects.get(id=validated_data['ong_id'])
-        rating = Rating.objects.create(user=user, ong=ong, comment = validated_data['comment'],
-                                       rating = validated_data['rating'])
-        rating.save()
+        rating = Rating.objects.create(**validated_data)
         return rating

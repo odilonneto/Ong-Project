@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.exceptions import ValidationError
 
 
 
@@ -129,13 +130,12 @@ class CreateRatingView(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
+        print(self.request.data)
         user = self.request.user.id
-        if not CustomerUser.objects.filter(user_id=user).exists():
-            return Response({'error': 'Usuário não é um CustomerUser.'}, status=status.HTTP_400_BAD_REQUEST)
-        user = CustomerUser.objects.get(user_id=user)
-        ong_id = self.request.data.get('ong')
-        if Rating.objects.filter(user=user, ong_id=ong_id).exists():
-            return Response({'error': 'Usuário já possui uma avaliação para esta ONG.'},
-                            status=status.HTTP_400_BAD_REQUEST)
-
-        serializer.save(user=user)
+        ong_id = self.request.data['ong_id']
+        rating_already_exists = Rating.objects.filter(user_id=user, ong=ong_id)
+        if len(rating_already_exists) > 0:
+            print('teste2')
+            raise ValidationError({'error': 'Usuário já possui uma avaliação para esta ONG.'})
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
