@@ -18,7 +18,10 @@ function Pet({ pet, onDelete, onEdit }) {
     };
 
     return (
-        <div className="pet-container">
+        <div className={`pet-container ${!pet.is_pet_available ? 'adopted' : ''}`}>
+            {!pet.is_pet_available && (
+                <div className="adopted-banner">Adotado</div>
+            )}
             {isEditing ? (
                 <PetForm onSubmit={handleSubmit} pet={pet} />
             ) : (
@@ -35,9 +38,12 @@ function Pet({ pet, onDelete, onEdit }) {
                         <p className="pet-neutered">
                             Castrado: {pet.is_pet_neutered ? "Sim" : "Não"}
                         </p>
+                        <p className="pet-availability">
+                            Disponível para adoção: {pet.is_pet_available ? "Sim" : "Não"}
+                        </p>
                     </div>
 
-                    <img  className="image1" src={pet.pet_photos} width="200" height="200" alt="Pet" />
+                    <img className="image1" src={pet.pet_photos} width="200" height="200" alt="Pet" />
                     <button className="delete-button" onClick={handleDelete}>
                         Delete
                     </button>
