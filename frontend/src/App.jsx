@@ -73,7 +73,7 @@ function App() {
         <Route path="/edit/ong" element={<OngProtectedRoute> <EditPage /> </OngProtectedRoute>}></Route>
         <Route path="/ongs" element={<ONGList />} />
         <Route path="/pets/:ongId" element={<PetList />} />
-        <Route path="/create/pet" element={<CreatePet />} />
+        <Route path="/create/pet" element={<OngProtectedRoute> <CreatePet /> </OngProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )

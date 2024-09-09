@@ -4,7 +4,7 @@ import api from "../api";
 import OngRegisterForm from "../components/OngRegisterForm";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "../constants";
 import { jwtDecode } from "jwt-decode";
-
+import Header from "../components/header";
 
 function EditPage(){
     const [loading, setLoading] = useState(false);
@@ -38,11 +38,14 @@ function EditPage(){
                     navigate("/logout");
                 }
     }
-    return(<div className="bodylogin">
-        <OngRegisterForm header="Informações" button_text="Salvar alterações" isEditing={true}>
+    return(
+        <div>
+            <Header></Header>
+    <div className="bodylogin">
+        <OngRegisterForm header="Informações" button_text="Salvar alterações" isEditing={true}>        </OngRegisterForm>
         <button className="excluir" onClick={handleOngDelete}> Excluir Perfil </button>
-        </OngRegisterForm>
- 
+
+        </div>
         </div>)
 }
 export default EditPage;
