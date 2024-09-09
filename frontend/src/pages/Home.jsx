@@ -3,13 +3,17 @@ import { useNavigate } from "react-router-dom";
 import api from "../api";
 import Pet from "../components/Pet";
 import "../styles/Home.css";
+import { jwtDecode } from "jwt-decode";
+import { ACCESS_TOKEN } from "../constants";
 
 function Home() {
     const [pets, setPets] = useState([]);
+    const [ongData, setOngData] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
         getPets();
+        getOngName();
     }, []);
 
     const getPets = () => {
@@ -38,13 +42,21 @@ function Home() {
             })
             .catch((error) => alert(error));
     };
+    const getOngName = () => {
+        const decoded = jwtDecode(localStorage.getItem(ACCESS_TOKEN));
+        const ongId = decoded["ong_id"];
+        const data = api.get(`/ongs/${ongId}`).then((res) => res.data)
+        .then((data) => setOngData(data))
+        .catch((err) => alert(err));
 
+
+    }
     const handleHomeClick = () => navigate('/');
 
     return (
         <div className="bodyhome">
             <div className="cabecaButton">
-            <h3 className="Nome">Nomeong</h3>
+            <h3 className="Nome">{ongData.ong_name}</h3>
                 <div><button onClick={() => navigate("/create/pet")}> Cadastrar Pet </button></div>
                 <div><button onClick={() => navigate("/edit/ong")}> Editar informações</button></div>
                 <button onClick={handleHomeClick}>Home</button>

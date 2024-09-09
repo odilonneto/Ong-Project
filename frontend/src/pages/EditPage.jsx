@@ -39,8 +39,10 @@ function EditPage(){
                 }
     }
     return(<div className="bodylogin">
-        <OngRegisterForm header="Informações" button_text="Salvar alterações" isEditing={true}></OngRegisterForm>
+        <OngRegisterForm header="Informações" button_text="Salvar alterações" isEditing={true}>
         <button className="excluir" onClick={handleOngDelete}> Excluir Perfil </button>
+        </OngRegisterForm>
+ 
         </div>)
 }
 export default EditPage;
