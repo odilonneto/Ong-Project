@@ -7,8 +7,11 @@ import "../styles/PetList.css"; // Importando o CSS para manter o estilo
 
 function PetList( {ong} ) { 
     const [pets, setPets] = useState([]);
+    const [reviews, setReviews] = useState([]); // Estado para armazenar avaliações
+    const [averageRating, setAverageRating] = useState(0); // Estado para armazenar média
     const navigate = useNavigate(); // Para navegação
     const [isReviewPopupOpen, setIsReviewPopupOpen] = useState(false);
+    const [IsViewReviewsOpen, setIsViewReviewsOpen] = useState(false);
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(1);
 
@@ -19,6 +22,14 @@ function PetList( {ong} ) {
 
     const handleCloseReviewPopup = () => {
         setIsReviewPopupOpen(false);
+    };
+
+    const handleOpenViewReviews = () => {
+        setIsViewReviewsOpen(true);
+    };
+
+    const handleCloseViewReviews = () => {
+        setIsViewReviewsOpen(false);
     };
 
     const handleStarClick = (star) => {
@@ -38,7 +49,7 @@ function PetList( {ong} ) {
                     "rating": rating,
                     "comment": comment
                 });
-
+                fetchReviews();
             } catch (error) {
 
                 if (error.response && error.response.data) {
@@ -56,6 +67,19 @@ function PetList( {ong} ) {
             setIsReviewPopupOpen(false);
         }
     };
+    const fetchReviews = async () => {
+        try {
+            const response = await api.get(`ongs/${ong.id}/rating`);
+            const data = response.data;
+            setReviews(data);
+
+            const average = data.reduce((sum, review) => sum + review.rating, 0) / data.length;
+            setAverageRating(average);
+        } catch (err) {
+            alert(err);
+        }
+    };
+
     useEffect(() => {
         if (ong) {
             // Primeira requisição: busca os pets relacionados à ONG
@@ -65,6 +89,7 @@ function PetList( {ong} ) {
                     setPets(data);
                 })
                 .catch(err => alert(err));
+                fetchReviews();
         }
     }, [ong]);
 
@@ -76,52 +101,89 @@ function PetList( {ong} ) {
         <div className="PetBody">
             <div className="buttons-ped">
                 <div className="buttons-container1">
-                    <button onClick={handleHomeClick}>Home</button>
-                    <button onClick={handleOngsClick}>Voltar para ONGs</button>
+                    <button onClick={() => navigate('/')}>Home</button>
+                    <button onClick={() => navigate('/ongs')}>Voltar para ONGs</button>
                     <button onClick={handleOpenReviewPopup} className="review-button">Deixar uma Avaliação</button>
+                </div>
+            </div>
+            <div className="Upper">
+                <h1 className="hnome">
+                    {ong.ong_name}
+                    <div className="rating-header">
+                        <div className="stars">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <span key={star} className={star <= averageRating ? "star selected" : "star"}>
+                                    &#9733;
+                                </span>
+                            ))}
+                        </div>
+                        <button onClick={handleOpenViewReviews} className="view-reviews-button">
+                            Ver Avaliações
+                        </button>
+                    </div>
+                </h1>
+                {pets.length > 0 ? (
+                    <h4 className="hpets">Pets disponíveis para adoção:</h4>
+                ) : (
+                    <h4 className="hpets">Esta ONG ainda não tem pets disponíveis para adoção.</h4>
+                )}
+            </div>
 
-                    {isReviewPopupOpen && (
-                        <div className="review-popup">
-                            <div className="review-popup-content">
-                                <h3>Deixe sua Avaliação</h3>
-                                <form onSubmit={handleSubmitReview}>
-                                    <textarea
-                                        placeholder="Comentário"
-                                        value={comment}
-                                        onChange={(e) => setComment(e.target.value)}
-                                        required
-                                    ></textarea>
-                                    <div className="star-rating">
+
+            {IsViewReviewsOpen && (
+                <div className="reviews-popup">
+                    <div className="reviews-popup-content">
+                        <h3>Avaliações</h3>
+                        <ul>
+                            {reviews.map((review, index) => (
+                                <li key={index}>
+                                    <div className="stars">
                                         {[1, 2, 3, 4, 5].map((star) => (
-                                            <span
-                                                key={star}
-                                                className={star <= rating ? "star selected" : "star"}
-                                                onClick={() => handleStarClick(star)}
-                                            >
+                                            <span key={star} className={star <= review.rating ? "star selected" : "star"}>
                                                 &#9733;
                                             </span>
                                         ))}
                                     </div>
-                                    <div className="button-container">
-                                        <button type="submit" className="submit-button">Enviar</button>
-                                        <button type="button" onClick={handleCloseReviewPopup} className="cancel-button">Cancelar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </div>
-            <div className="Upper">
-                <h1 className="hnome">{ong.ong_name}</h1> {/* Exibe o nome da ONG */}
-                {pets.length > 0 ? (
-                    <h4 className="hpets">Pets disponíveis para adoção:</h4>
-                ) : (
-                    <div className="no-pets-message">
-                        <h4 className="hpets">Esta ONG ainda não tem pets disponíveis para adoção.</h4>
+                                    <p>{review.comment}</p>
+                                </li>
+                            ))}
+                        </ul>
+                        <button onClick={handleCloseViewReviews} className="close-reviews-button">Fechar</button>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
+
+            {/* Popup para enviar nova avaliação */}
+            {isReviewPopupOpen && (
+                <div className="review-popup">
+                    <div className="review-popup-content">
+                        <h3>Deixe sua Avaliação</h3>
+                        <form onSubmit={handleSubmitReview}>
+                            <textarea
+                                placeholder="Comentário"
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                                required
+                            />
+                            <div className="star-rating">
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                    <span
+                                        key={star}
+                                        className={star <= rating ? "star selected" : "star"}
+                                        onClick={() => handleStarClick(star)}
+                                    >
+                                        &#9733;
+                                    </span>
+                                ))}
+                            </div>
+                            <div className="button-container">
+                                <button type="submit" className="submit-button">Enviar</button>
+                                <button type="button" onClick={handleCloseReviewPopup} className="cancel-button">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
 
             <ul className="pet-list">
                 {pets.map(pet => (
@@ -130,7 +192,6 @@ function PetList( {ong} ) {
                             <div className="adopted-banner">Adotado</div>
                         )}
                         <p className="pet-name">{pet.pet_name}</p>
-                        <i className="fas fa-paw"></i>
                         <div className="pet-details">
                             <p className="pet-content">Idade: {pet.pet_age} meses</p>
                             <p className="pet-vaccines">Vacinas: {pet.pet_vaccines}</p>
@@ -150,5 +211,4 @@ function PetList( {ong} ) {
         </div>
     );
 }
-
 export default PetList;

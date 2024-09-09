@@ -46,6 +46,7 @@
 
 .hnome{
   margin-bottom: 0;
+  justify-content: center;
 }
 .hpets{
   margin-top: 0.9px;
@@ -203,4 +204,84 @@ textarea {
 .submit-button:hover,
 .cancel-button:hover {
   background-color: darkblue;
+}
+.rating-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px; /* Ajuste o espaço entre o nome da ONG e as avaliações */
+}
+
+.stars {
+  display: flex;
+  margin-right: 16px; /* Espaçamento entre as estrelas e o botão */
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.star.selected {
+  color: gold;
+}
+
+.view-reviews-button {
+  padding: 8px 16px;
+  background-color: #004aad;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-reviews-button:hover {
+  background-color: #5e85ae;
+}
+
+.reviews-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 500px;
+}
+
+.reviews-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reviews-popup-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.reviews-popup-content li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.close-reviews-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #004aad;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-reviews-button:hover {
+  background-color: #5e85ae;
 }
