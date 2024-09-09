@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import api from "../api";
 import "../styles/CreatePet.css"
 import { useNavigate } from "react-router-dom";
-
+import Header
+ from "../components/header";
 function PetForm({ pet }) {
     const [petName, setPetName] = useState("");
     const [petAge, setPetAge] = useState("");
@@ -49,7 +50,9 @@ function PetForm({ pet }) {
 
     }
     return (
+        <div> <Header></Header>
         <div className="bodycreatepet">
+
     <form onSubmit={handleSubmit} className="pet-form">
     <h2 className="nomecabe">Cadastrar Pet</h2>
     <label htmlFor="pet-name">Pet name:</label>
@@ -130,7 +133,7 @@ function PetForm({ pet }) {
 
     <input type="submit" value="Submit" className="form-button" />
 </form>
-
+</div>
         </div>
     );
 }
