@@ -133,7 +133,6 @@ function PetList( {ong} ) {
                 )}
             </div>
 
-
             {IsViewReviewsOpen && (
                 <div className="reviews-popup">
                     <div className="reviews-popup-content">

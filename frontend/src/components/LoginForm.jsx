@@ -104,8 +104,11 @@ function LoginForm(){
             <button className="form-button" type="submit">
                 Login
             </button>
-            <button className="form2-button" onClick={handleOngClick}>
-                    Cadastre-se
+            <button className="form2-button"  onClick={() => navigate("/register/user")}>
+                    Cadastrar Usuário
+            </button>
+            <button className="form2-button"  onClick={() => navigate("/register/ong")}>
+                    Cadastrar ONG
             </button>
         </form>
         </div>
