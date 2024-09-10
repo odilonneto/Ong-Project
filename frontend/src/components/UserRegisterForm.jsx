@@ -57,7 +57,7 @@ function UserRegisterForm( {isEditing, header, button_text } ){
         try{
             const res = await api.post(route, { user: {"username": username, "password": password}, 
             "name": name, "email": userEmail, "phone_number": phoneNumber, "gender": gender,
-        "birth_date": birthDate, "user_cpf": cpf});
+        "birth_date": birthDate, "user_cpf": cpf, "address": userAddress});
             navigate("/login");
         }
         catch (error){
