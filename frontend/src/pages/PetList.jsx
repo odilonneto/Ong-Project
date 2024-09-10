@@ -196,22 +196,30 @@ function PetList( {ong} ) {
             )}
 
             <ul className="pet-list">
-                {pets.map(pet => (
-                    <li key={pet.id} className={`pet-container ${!pet.is_pet_available ? 'adopted' : ''}`}>
-                        {!pet.is_pet_available && (
-                            <div className="adopted-banner">Adotado</div>
-                        )}
-                        <p className="pet-name">{pet.pet_name}</p>
-                        <div className="pet-details">
-                            <p className="pet-content">Idade: {pet.pet_age} meses</p>
-                            <p className="pet-vaccines">Vacinas: {pet.pet_vaccines}</p>
-                            <p className="pet-neutered">Castrado: {pet.is_pet_neutered ? "Sim" : "Não"}</p>
-                            <p className="pet-availability">Disponível para adoção: {pet.is_pet_available ? "Sim" : "Não"}</p>
-                        </div>
-                        <img className="image1" src={`http://localhost:8000${pet.pet_photos}`} width="200" height="200" alt={pet.pet_name} />
-                    </li>
-                ))}
+            {pets.map(pet => (
+                <li key={pet.id} className={`pet-container ${!pet.is_pet_available ? 'adopted' : ''}`}>
+                {!pet.is_pet_available && (
+                    <div className="adopted-banner">Adotado</div>
+                )}
+                <div>
+                    <p className="pet-name">{pet.pet_name}</p>
+                </div>
+                <div>
+                    <i className="fas fa-paw"></i>
+                </div>
+                <div className="pet-details">
+                    <p className="pet-content">Idade: {pet.pet_age} meses</p>
+                    <p className="pet-vaccines">Vacinas: {pet.pet_vaccines}</p>
+                    <p className="pet-neutered">Castrado: {pet.is_pet_neutered ? "Sim" : "Não"}</p>
+                    <p className="pet-availability">Disponível para adoção: {pet.is_pet_available ? "Sim" : "Não"}</p>
+                </div>
+                <div>
+                    <img className="image1" src={`http://localhost:8000${pet.pet_photos}`} width="200" height="200" alt={pet.pet_name} />
+                </div>
+                </li>
+            ))}
             </ul>
+
 
             <footer className="footer">
                 <h4 className="gostou">Gostou de algum Pet e deseja adotar? Entre em contato com nossa ONG!</h4>
