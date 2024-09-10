@@ -9,6 +9,7 @@
   background-position: center;  
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .pet-container {
@@ -72,11 +73,11 @@
 }
 
 .footer {
-    margin-top: auto; /* Empurra o rodapé para o final */
-    background-color: #004aad;
-    color: white;
-    text-align: center;
-    padding: 20px;
+  margin-top: auto; /* Empurra o rodapé para o final */
+  background-color: #004aad;
+  color: white;
+  text-align: center;
+  padding: 20px;
 }
 
 .gostou{
