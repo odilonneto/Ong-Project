@@ -54,8 +54,10 @@ class ONGSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(username=user_data['username'], password=user_data['password'])
         ong = ONG.objects.create(user=user, ong_name=validated_data['ong_name'],
                                  custom_url=validated_data['custom_url'],
-                                 ong_address=validated_data['ong_address'], ong_cnpj=validated_data['ong_cnpj'],
-                                 ong_phone_number=validated_data['ong_phone_number'],
+                                 ong_address=validated_data['ong_address'], ong_cnpj=validated_data['ong_cnpj'].
+                                 replace(".","").replace("/","").replace("-",""),
+                                 ong_phone_number=validated_data['ong_phone_number'].replace("(","").
+                                 replace(")", "").replace("-", ""),
                                  ong_email=validated_data['ong_email'])
         ong.save()
         return ong
@@ -74,7 +76,7 @@ class CustomerUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomerUser
-        fields = ['user', 'name', 'email', 'phone_number', 'gender', 'birth_date', 'user_cpf', 'id']
+        fields = ['user', 'name', 'email', 'phone_number', 'gender', 'birth_date', 'user_cpf', 'id', 'address']
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
@@ -84,7 +86,8 @@ class CustomerUserSerializer(serializers.ModelSerializer):
                                                     phone_number=validated_data['phone_number'],
                                                     gender=validated_data['gender'],
                                                     birth_date=validated_data['birth_date'],
-                                                    user_cpf=validated_data['user_cpf'])
+                                                    user_cpf=validated_data['user_cpf'],
+                                                    address=validated_data['address'])
         customer_user.save()
         return customer_user
 

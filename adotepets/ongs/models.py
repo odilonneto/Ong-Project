@@ -7,7 +7,12 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-invalid_characters = ['!', '@', '#', '$', '%', '¨¨', '(', ')', '=', '+', '/', '?', ',', ':', ';', '"', '[', ']', '.']
+invalid_characters = ['!', '@', '#', '$', '%', '¨¨', '(', ')', '=', '+', '/', '?', ':', ';', '"', '[', ']']
+invalid_cnpj = ["00000000000000", "11111111111111", "22222222222222", "33333333333333","44444444444444","55555555555555","66666666666666","77777777777777", "88888888888888", "99999999999999"]
+def validate_name(name):
+    for letter in name:
+        if letter in invalid_characters:
+            raise ValidationError('%s is not a valid name' % name)
 
 def validate_address(address):
     for letter in address:
@@ -33,6 +38,8 @@ def find_last_cnpj_numbers(cnpj):
         return str(11 - rest)
 
 def validate_cnpj(cnpj):
+    if cnpj in invalid_cnpj:
+        raise ValidationError('%s is not a valid CNPJ.' % cnpj)
     for number in cnpj:
         if not number.isnumeric():
             raise ValidationError('%s is not a valid CNPJ.' % cnpj)
@@ -49,6 +56,10 @@ def validate_phone_number(phone_number):
     phone_string_number = str(phone_number)
     if len(phone_string_number) < 10 or len(phone_string_number) > 11:
         raise ValidationError('%s is not a valid Phone Number' % phone_number)
+    for number in phone_number:
+        if not number.isnumeric():
+            raise ValidationError('%s is not a valid CNPJ.' % phone_number)
+
 
 def email_validator(email):
     if not "@" in email:
@@ -72,12 +83,13 @@ class CustomerUser(models.Model):
     phone_number = models.CharField(max_length=15)
     genders = (("M", "Man"), ("W", "Woman"), ("O", "Other"))
     birth_date = models.DateField()
+    address = models.CharField(max_length=200, validators=[validate_address])
     gender = models.CharField(max_length=1, choices=genders)
     user_cpf = models.CharField(max_length=20)
 
 class ONG(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    ong_name = models.CharField(max_length=40, unique=True)
+    ong_name = models.CharField(max_length=40, unique=True, validators=[validate_name])
     custom_url = models.CharField(max_length=20, default=str(ong_name).replace(' ', ''), unique=True)
     ong_address = models.CharField(max_length=200, validators=[validate_address])
     ong_cnpj = models.CharField(blank=True, validators=[validate_cnpj], unique=True)

@@ -86,11 +86,13 @@ function OngRegisterForm( {isEditing, header, button_text }){
             <input className="form-input"
             type="text"
             value={username}
+            required
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Usuário"/>
             
             <input className="form-input"
             type="password"
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Senha"/>
@@ -99,6 +101,7 @@ function OngRegisterForm( {isEditing, header, button_text }){
         </>
         <input className="form-input"
         type="text"
+        required
         value={ongEmail}
         onChange={(e) => setOngEmail(e.target.value)}
         placeholder="E-mail"/>
@@ -109,6 +112,7 @@ function OngRegisterForm( {isEditing, header, button_text }){
         ) : (
         <input className="form-input"
         type="text"
+        required
         value={ongName}
         onChange={(e) => setOngName(e.target.value)}
         placeholder="Nome da ong"/>
@@ -116,6 +120,7 @@ function OngRegisterForm( {isEditing, header, button_text }){
         </>
         <input className="form-input"
         type="text"
+        required
         value={customUrl}
         onChange={(e) => setCustomUrl(e.target.value)}
         placeholder="URL Personalizável"/>
