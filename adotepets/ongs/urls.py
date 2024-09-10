@@ -19,4 +19,6 @@ urlpatterns = [
     path('<int:ong_id>/rating', OngRatingView.as_view(), name='ong-rating'),
     path('ratings/create', CreateRatingView.as_view(), name='create-rating'),
     path('customer/<int:pk>', CustomerUserRetrieve.as_view(), name='retrieve-customer-user'),
+    path('customer/delete/<int:pk>', CustomerUserDelete.as_view(), name='delete-customer-user'),
+    path('customer/update/<int:pk>', CustomerUserUpdate.as_view(), name='update-customer-user'),
 ]
