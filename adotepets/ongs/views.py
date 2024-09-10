@@ -102,6 +102,10 @@ class ONGRetrieve(generics.RetrieveAPIView):
     serializer_class = ONGSerializer
     permission_classes = [AllowAny]
 
+class CustomerUserRetrieve(generics.RetrieveAPIView):
+    queryset = CustomerUser.objects.all()
+    serializer_class = CustomerUserSerializer
+    permission_classes = [AllowAny]
 
 class ONGDelete(generics.DestroyAPIView):
     serializer_class = ONGSerializer
@@ -132,7 +136,7 @@ class CreateRatingView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         print(self.request.data)
-        user = self.request.data['customer_id']
+        user = self.request.data['user_id']
         ong_id = self.request.data['ong_id']
         user_is_customer = CustomerUser.objects.filter(id=user)
         if len(user_is_customer) < 1:

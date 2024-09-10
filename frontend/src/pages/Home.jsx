@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import api from "../api";
 import Pet from "../components/Pet";
 import "../styles/Home.css";
@@ -12,8 +12,10 @@ function Home() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        getPets();
-    }, []);
+        if (location.pathname === "/admin") {
+            getPets();
+        }
+    }, [location.pathname]);
 
     const getPets = () => {
         api.get("/ongs/pets/list")
