@@ -4,7 +4,7 @@ import api from '../api';
 import { jwtDecode } from 'jwt-decode';
 import { ACCESS_TOKEN } from '../constants';
 import "../styles/PetList.css"; // Importando o CSS para manter o estilo
-
+import Header from '../components/header';
 function PetList( {ong} ) { 
     const [pets, setPets] = useState([]);
     const [reviews, setReviews] = useState([]); // Estado para armazenar avaliações
@@ -41,7 +41,10 @@ function PetList( {ong} ) {
         try{
             const token = localStorage.getItem(ACCESS_TOKEN)
             const decoded = jwtDecode(token);
-            const user_id = decoded["user_id"];
+            const user_id = decoded["customer_id"];
+            if (user_id === undefined){
+                throw "Faça login como usuário."
+            }
             try {
                 await api.post("ongs/ratings/create", {
                     "ong_id": ong.id,
@@ -49,6 +52,7 @@ function PetList( {ong} ) {
                     "rating": rating,
                     "comment": comment
                 });
+                alert("Avaliação criada com sucesso!");
                 fetchReviews();
             } catch (error) {
 
@@ -61,7 +65,7 @@ function PetList( {ong} ) {
         }
         catch(error){
             alert("Faça login para continuar.")
-            navigate("/login")
+            navigate("/logout");
         }
         finally{
             setIsReviewPopupOpen(false);
@@ -100,9 +104,8 @@ function PetList( {ong} ) {
     return (
         <div className="PetBody">
             <div className="buttons-ped">
+                <Header></Header>
                 <div className="buttons-container1">
-                    <button onClick={() => navigate('/')}>Home</button>
-                    <button onClick={() => navigate('/ongs')}>Voltar para ONGs</button>
                     <button onClick={handleOpenReviewPopup} className="review-button">Deixar uma Avaliação</button>
                 </div>
             </div>
@@ -137,7 +140,7 @@ function PetList( {ong} ) {
                         <ul>
                             {reviews.map((review, index) => (
                                 <li key={index}>
-                                    <p>{review.user_name}</p>
+                                    <p>Usuário: {review.user_name}</p>
                                     <div className="stars">
                                         {[1, 2, 3, 4, 5].map((star) => (
                                             <span key={star} className={star <= review.rating ? "star selected" : "star"}>

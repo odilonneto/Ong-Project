@@ -23,9 +23,10 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         try:
             customer_user = user.customeruser
             token['cpf'] = customer_user.user_cpf
-            token['user_id'] = customer_user.id
+            token['customer_id'] = customer_user.id
         except CustomerUser.DoesNotExist:
             pass
+        print(token)
         return token
 
 
@@ -73,7 +74,7 @@ class CustomerUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomerUser
-        fields = ['user', 'name', 'email', 'phone_number', 'gender', 'birth_date', 'user_cpf']
+        fields = ['user', 'name', 'email', 'phone_number', 'gender', 'birth_date', 'user_cpf', 'id']
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')

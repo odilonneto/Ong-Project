@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
+import Header from '../components/header';
 import "../styles/ONGList.css";
 
 function ONGList() {
@@ -45,9 +46,7 @@ function ONGList() {
     return (
         <div className='bodyhome'>
             <div className="buttons-ped">
-                <div className="buttons-container1">
-                    <button onClick={handleHomeClick}>Home</button>
-                </div>
+                <Header></Header>
             </div>
             <div className="Upper">
                 <h1 className="hpets">ONGs</h1>

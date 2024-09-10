@@ -18,4 +18,5 @@ urlpatterns = [
     path('<int:ong_id>/pets', PetListByOngView.as_view(), name='pets-by-ong'),
     path('<int:ong_id>/rating', OngRatingView.as_view(), name='ong-rating'),
     path('ratings/create', CreateRatingView.as_view(), name='create-rating'),
+    path('customer/<int:pk>', CustomerUserRetrieve.as_view(), name='retrieve-customer-user'),
 ]
