@@ -5,6 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import { ACCESS_TOKEN } from '../constants';
 import "../styles/PetList.css"; // Importando o CSS para manter o estilo
 import Header from '../components/header';
+
 function PetList( {ong} ) { 
     const [pets, setPets] = useState([]);
     const [reviews, setReviews] = useState([]); // Estado para armazenar avaliações
@@ -132,30 +133,34 @@ function PetList( {ong} ) {
                 )}
             </div>
 
-
             {IsViewReviewsOpen && (
                 <div className="reviews-popup">
                     <div className="reviews-popup-content">
                         <h3>Avaliações</h3>
-                        <ul>
-                            {reviews.map((review, index) => (
-                                <li key={index}>
-                                    <p>Usuário: {review.user_name}</p>
-                                    <div className="stars">
-                                        {[1, 2, 3, 4, 5].map((star) => (
-                                            <span key={star} className={star <= review.rating ? "star selected" : "star"}>
-                                                &#9733;
-                                            </span>
-                                        ))}
-                                    </div>
-                                    <p>{review.comment}</p>
-                                </li>
-                            ))}
-                        </ul>
+                        {reviews.length === 0 ? (
+                            <p>Nenhuma avaliação disponível para esta ONG.</p> // Aviso quando não houver avaliações
+                        ) : (
+                            <ul>
+                                {reviews.map((review, index) => (
+                                    <li key={index}>
+                                        <p>Usuário: {review.user_name}</p>
+                                        <div className="stars">
+                                            {[1, 2, 3, 4, 5].map((star) => (
+                                                <span key={star} className={star <= review.rating ? "star selected" : "star"}>
+                                                    &#9733;
+                                                </span>
+                                            ))}
+                                        </div>
+                                        <p>{review.comment}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                         <button onClick={handleCloseViewReviews} className="close-reviews-button">Fechar</button>
                     </div>
                 </div>
             )}
+
 
             {/* Popup para enviar nova avaliação */}
             {isReviewPopupOpen && (

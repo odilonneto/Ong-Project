@@ -1,9 +1,9 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import api from "../api"
 import { useNavigate } from "react-router-dom"
 import "../styles/Form.css"
 
-function UserRegisterForm(){
+function UserRegisterForm( {isEditing, header, button_text } ){
     const route = "/ongs/customer/register";
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -14,11 +14,44 @@ function UserRegisterForm(){
     const [userEmail, setUserEmail] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [loading, setLoading] = useState(false);
+    const [data, setData] = useState("")
     const navigate = useNavigate();
+    useEffect(() => {
+        if (isEditing) {
+          const userId = localStorage.getItem("account_id");
+            api.get(`/ongs/customer/${userId}`)
+              .then((res) => {
+                setData(res.data);
+              })
+              .catch((err) => alert(err));
+          }
+      }, [isEditing]);
+      useEffect(() => {
+        if (data) {
+          setUserEmail(data.email || "");
+          setPhoneNumber(data.phone_number || "");
+        }
+      }, [data]);
+    
     const handleSubmit = async (e) => {
         setLoading(true);
         e.preventDefault();
-
+        if (isEditing){
+            try{
+            const userId = localStorage.getItem("account_id");
+            const res = await api.patch(`/ongs/customer/update/${userId}`, {"email": userEmail,
+                "phone_number": phoneNumber});
+            alert('Alterações salvas com sucesso');
+            navigate("/ongs");
+            }
+            catch (error){
+                alert(error);
+            }
+            finally{
+                setLoading(false);
+            }
+        }
+        else{
         try{
             const res = await api.post(route, { user: {"username": username, "password": password}, 
             "name": name, "email": userEmail, "phone_number": phoneNumber, "gender": gender,
@@ -32,9 +65,14 @@ function UserRegisterForm(){
             setLoading(false);
         }
     }
+    }
 
-    return <form onSubmit={handleSubmit} className="form-container">
-        <h1>Formulário de Registro</h1>
+    return( 
+    <div className="bodylogin">
+    <form onSubmit={handleSubmit} className="form-container">
+        <h1>{header}</h1>
+        <>{isEditing ? (<></>) : (
+            <>
         <input className="form-input"
         type="text"
         value={username}
@@ -52,7 +90,10 @@ function UserRegisterForm(){
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Nome"/>
-
+        </>
+        )
+        }
+        </>
         <input className="form-input"
         type="text"
         value={userEmail}
@@ -65,7 +106,8 @@ function UserRegisterForm(){
         value={phoneNumber}
         onChange={(e) => setPhoneNumber(e.target.value)}
         placeholder="Telefone"/>
-
+        {isEditing ? <></> : 
+        <>
         <input className="form-input"
         type="text"
         value={cpf}
@@ -86,12 +128,14 @@ function UserRegisterForm(){
 
         <input type="date" id="birth_date" name="trip-start" value={birthDate} min="1900-01-01" max="2006-09-04"
         onChange={(e) => setBirthDate(e.target.value)}/>
-
-
+        </>
+}
         <button className="form-button" type="submit">
-            Registre-se
+            {button_text}
         </button>
     </form>
+    </div>
+    )
 }
 
 export default UserRegisterForm

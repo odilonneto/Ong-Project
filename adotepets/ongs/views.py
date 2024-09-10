@@ -23,6 +23,11 @@ class ONGUpdate(generics.UpdateAPIView):
     permission_classes = [IsAuthenticated, ]
     queryset = ONG.objects.all()
 
+class CustomerUserUpdate(generics.UpdateAPIView):
+    serializer_class = CustomerUserSerializer
+    authentication_classes = [JWTAuthentication, ]
+    permission_classes = [IsAuthenticated, ]
+    queryset = CustomerUser.objects.all()
 
 class PetUpdate(generics.UpdateAPIView):
     serializer_class = PetSerializer
@@ -119,6 +124,17 @@ class ONGDelete(generics.DestroyAPIView):
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class CustomerUserDelete(generics.DestroyAPIView):
+    serializer_class = CustomerUserSerializer
+    authentication_classes = [JWTAuthentication, ]
+    permission_classes = [IsAuthenticated]
+    queryset = CustomerUser.objects.all()
+    def delete(self, request, pk, format=None):
+        customer_user = CustomerUser.objects.get(id=pk)
+        user = User.objects.get(id=customer_user.user_id)
+        customer_user.delete()
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class OngRatingView(generics.ListAPIView):
     serializer_class = RatingSerializer
