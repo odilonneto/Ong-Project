@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 
 function UserEditPage(){
     const [loading, setLoading] = useState(false);
-    const [isAuthorized, setAuthorized] = useState(false);
+    const [isAuthorized, setAuthorized] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
         if (localStorage.getItem("account_type") === "Usuário") {
@@ -18,7 +18,7 @@ function UserEditPage(){
         else{
             setAuthorized(false);
         }
-      }, [localStorage]);
+      }, []);
     const handleUserDelete = async (e) => {
         e.preventDefault();
 
