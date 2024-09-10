@@ -3,13 +3,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 import api from "../api";
 import Pet from "../components/Pet";
 import "../styles/Home.css";
-import { jwtDecode } from "jwt-decode";
-import { ACCESS_TOKEN } from "../constants";
 import Header from "../components/header";
+
 function Home() {
     const [pets, setPets] = useState([]);
     const [ongData, setOngData] = useState("");
     const navigate = useNavigate();
+    const location = useLocation(); // adicionei para o useLocation funcionar
 
     useEffect(() => {
         if (location.pathname === "/admin") {
@@ -20,7 +20,11 @@ function Home() {
     const getPets = () => {
         api.get("/ongs/pets/list")
             .then((res) => res.data)
-            .then((data) => setPets(data))
+            .then((data) => {
+                // Ordenar pets: disponíveis para doação primeiro
+                const sortedPets = data.sort((a, b) => b.is_pet_available - a.is_pet_available);
+                setPets(sortedPets);
+            })
             .catch((err) => alert(err));
     };
 
@@ -43,13 +47,16 @@ function Home() {
             })
             .catch((error) => alert(error));
     };
-   
 
     return (
         <div className="bodyhome">
-            <Header></Header>
+            <Header />
             <div>
-                {pets.length > 0 ? (<h2 className="Petsh">Pets Cadastrados</h2>) : (<h2 className="Petsh">Ainda não há Pets cadastrados</h2>)}
+                {pets.length > 0 ? (
+                    <h2 className="Petsh">Pets Cadastrados</h2>
+                ) : (
+                    <h2 className="Petsh">Ainda não há Pets cadastrados</h2>
+                )}
                 {pets.map((pet) => (
                     <Pet pet={pet} onDelete={deletePet} onEdit={editPet} key={pet.id} />
                 ))}
