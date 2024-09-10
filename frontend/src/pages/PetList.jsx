@@ -91,7 +91,8 @@ function PetList( {ong} ) {
             api.get(`ongs/${ong.id}/pets`)
                 .then(response => response.data)
                 .then(data => {
-                    setPets(data);
+                    const sortedPets = data.sort((a, b) => b.is_pet_available - a.is_pet_available);
+                    setPets(sortedPets);
                 })
                 .catch(err => alert(err));
                 fetchReviews();
