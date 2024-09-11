@@ -1,16 +1,18 @@
+import pdb
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from  django.core.validators import EmailValidator
+from django.contrib.auth.models import User
+from datetime import datetime
+from django.core.validators import MinValueValidator, MaxValueValidator
 
-
-invalid_characters = ['!', '@', '#', '$', '%', '¨¨', '(', ')', '=', '+', '/', '?', ',', ':', ';', '"', '[', ']', '.']
-def validate_valid_name(name):
-    if len(name) < 8:
-        raise ValidationError('%s is not a valid name' % name)
+invalid_characters = ['!', '@', '#', '$', '%', '¨¨', '(', ')', '=', '+', '/', '?', ':', ';', '"', '[', ']']
+invalid_cnpj = ["00000000000000", "11111111111111", "22222222222222", "33333333333333","44444444444444","55555555555555","66666666666666","77777777777777", "88888888888888", "99999999999999"]
+def validate_name(name):
     for letter in name:
-        if letter.isnumeric() or letter in invalid_characters:
+        if letter in invalid_characters:
             raise ValidationError('%s is not a valid name' % name)
-
 
 def validate_address(address):
     for letter in address:
@@ -34,7 +36,10 @@ def find_last_cnpj_numbers(cnpj):
         return '0'
     else:
         return str(11 - rest)
+
 def validate_cnpj(cnpj):
+    if cnpj in invalid_cnpj:
+        raise ValidationError('%s is not a valid CNPJ.' % cnpj)
     for number in cnpj:
         if not number.isnumeric():
             raise ValidationError('%s is not a valid CNPJ.' % cnpj)
@@ -51,6 +56,10 @@ def validate_phone_number(phone_number):
     phone_string_number = str(phone_number)
     if len(phone_string_number) < 10 or len(phone_string_number) > 11:
         raise ValidationError('%s is not a valid Phone Number' % phone_number)
+    for number in phone_number:
+        if not number.isnumeric():
+            raise ValidationError('%s is not a valid CNPJ.' % phone_number)
+
 
 def email_validator(email):
     if not "@" in email:
@@ -67,14 +76,34 @@ def email_validator(email):
         raise ValidationError('%s is not a valid email.' % email)
 
 
+class CustomerUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=15)
+    genders = (("M", "Man"), ("W", "Woman"), ("O", "Other"))
+    birth_date = models.DateField()
+    address = models.CharField(max_length=200, validators=[validate_address])
+    gender = models.CharField(max_length=1, choices=genders)
+    user_cpf = models.CharField(max_length=20)
+
 class ONG(models.Model):
-    ong_name = models.CharField(max_length=40, validators=[validate_valid_name])
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    ong_name = models.CharField(max_length=40, unique=True, validators=[validate_name])
+    custom_url = models.CharField(max_length=20, default=str(ong_name).replace(' ', ''), unique=True)
     ong_address = models.CharField(max_length=200, validators=[validate_address])
-    ong_cnpj = models.CharField(blank=True, validators=[validate_cnpj])
-    ong_phone_number = models.IntegerField()
-    ong_email = models.CharField(validators=[email_validator])
+    ong_cnpj = models.CharField(blank=True, validators=[validate_cnpj], unique=True)
+    ong_phone_number = models.CharField(max_length=12)
+    ong_email = models.CharField(validators=[EmailValidator])
+    class Meta:
+        permissions = [("pet_creation", "can create pets")]
     def __str__(self):
         return f'ONG: {self.ong_name}'
+
+
+def file_location(instance, filename, **kwargs):
+    file_path = f"static/images/{instance.pet_name}-{str(datetime.now())}{filename}"
+    return file_path
 
 
 class Pet(models.Model):
@@ -82,9 +111,17 @@ class Pet(models.Model):
     pet_name = models.CharField(max_length=200)
     pet_age = models.IntegerField()
     pet_vaccines = models.CharField(max_length=400)
-    pet_size = models.CharField(max_length=1)
+    size_choices = (('P', 'Pequeno'), ('M', 'Medio'), ('G','Grande'))
+    pet_size = models.CharField(max_length=1, choices=size_choices)
     is_pet_neutered = models.BooleanField()
     is_pet_available = models.BooleanField(default=True)
-    pet_photos = models.ImageField(upload_to = 'images/')
+    pet_photos = models.ImageField(upload_to=file_location)
+
     def __str__(self):
-        return f'Pet: {self.pet_name}'
+        return f'PET: {self.pet_name} URL: {self.pet_photos}'
+
+class Rating(models.Model):
+    user = models.ForeignKey(CustomerUser, on_delete=models.CASCADE)
+    ong = models.ForeignKey(ONG, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=300)
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])

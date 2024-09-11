@@ -1,0 +1,86 @@
+.bodylogin{
+    background-image: url('../assets/fundo.jpg'); /* Substitua com o caminho da sua imagem */
+    background-size: cover;      /* Faz a imagem cobrir toda a tela */
+    background-repeat: repeat;   /* Repete a imagem se a página for maior que a imagem */
+    background-attachment: fixed; /* Mantém a imagem fixa no lugar ao rolar */
+    background-position: center;  /* Centraliza a imagem no fundo */
+    min-height: 100vh;            /* Garante que o corpo da página tenha no mínimo a altura total da janela */
+    margin: 0;                    /* Remove margens para evitar deslocamento */
+    padding: 0;
+    display: flex;
+    justify-content: center;      /* Centraliza horizontalmente */
+    align-items: center;   
+    flex-direction: column;       /* Centraliza verticalmente */
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 1);
+    max-width: 400px;
+  }
+
+  
+  
+  .form-input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .form-button {
+    width: 90%;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #004aad;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .form-button:hover {
+    background-color: #0056b3;
+  }
+
+  .form2-button {
+    width: 95%;
+    padding: 10px;
+    background-color:white;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .form2-button:hover {
+    color: #004aad;
+  }
+
+  .excluir{
+    width: 150px;
+    padding: 20px;
+    font-size: 16px;
+    color: white;
+    background-color: red;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 0px;
+    margin-bottom: 2cm;
+    border-radius: 4px;
+  }
+
+  .excluir:hover{
+    background-color:crimson;
+  }

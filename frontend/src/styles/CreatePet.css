@@ -1,0 +1,66 @@
+.bodycreatepet{
+    background-image: url('../assets/fundo.jpg'); /* Substitua com o caminho da sua imagem */
+    background-size: cover;      /* Faz a imagem cobrir toda a tela */
+    background-repeat: repeat;   /* Repete a imagem se a página for maior que a imagem */
+    background-attachment: fixed; /* Mantém a imagem fixa no lugar ao rolar */
+    background-position: center;  /* Centraliza a imagem no fundo */
+    min-height: 100vh;            /* Garante que o corpo da página tenha no mínimo a altura total da janela */
+    margin: 0;                    /* Remove margens para evitar deslocamento */
+    padding: 0;
+    display: flex;
+    justify-content: center;      /* Centraliza horizontalmente */
+    align-items: center; 
+}
+
+.nomecabe{
+    color:#004aad;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+
+.pet-form {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    max-width: 400px;
+    margin: 24 auto; /* Centraliza o formulário */
+    padding: 40px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 3);
+}
+
+.pet-form label {
+    margin-top: 15px;
+    color: black;
+}
+
+.form-input, .form-select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-input[type="file"] {
+    padding: 5px;
+}
+
+.form-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #004aad;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.form-button:hover {
+    background-color: #0056b3;
+  }

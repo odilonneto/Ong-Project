@@ -1,0 +1,53 @@
+.bodyhome{
+    background-image: url('../assets/fundo.jpg'); /* Substitua com o caminho da sua imagem */
+    background-size: cover;      /* Faz a imagem cobrir toda a tela */
+    background-repeat: repeat;   /* Repete a imagem se a página for maior que a imagem */
+    background-attachment: fixed; /* Mantém a imagem fixa no lugar ao rolar */
+    background-position: center;  /* Centraliza a imagem no fundo */
+    min-height: 100vh;            /* Garante que o corpo da página tenha no mínimo a altura total da janela */
+    margin: 0;                    /* Remove margens para evitar deslocamento */
+    padding: 0;
+  }
+
+.ong-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.ong-item-container {
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo branco translúcido */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.ong-item-container:hover {
+    transform: scale(1.05); /* Aumenta levemente o tamanho ao passar o mouse */
+}
+
+.ong-item h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ong-item p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.ong-icon {
+    color: #333 !important;
+    margin-left: 10px;
+    font-size: 1.2em !important;
+}

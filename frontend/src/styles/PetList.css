@@ -1,0 +1,384 @@
+.PetBody{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o corpo ocupe pelo menos 100% da altura da tela */
+  background-image: url('../assets/fundo.jpg'); 
+  background-size: cover;
+  background-repeat: repeat;  
+  background-attachment: fixed;
+  background-position: center;  
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.pet-container {
+  
+  border: 2px #004aad;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px ;
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+  background-color: #f0f4f8;
+  box-shadow: 0 4px 10px #004aad;
+  transition: transform 0.3s ease;
+}
+
+.Upper{
+    font-size: 24px;
+    display: flex;
+    flex-direction:column ; /* Garante que os itens fiquem em coluna */
+    align-items: center;    /* Centraliza horizontalmente os itens */
+    justify-content: center; /* Centraliza verticalmente os itens */
+    width: 100vw; /* Controla a largura da coluna, ajuste para o tamanho desejado (aqui, 60% da largura da viewport) */
+    min-height:fit-content;
+    background-color: rgba(255, 255, 255, 0.7); /* Fundo branco com transparência */
+    backdrop-filter: blur(15px); /* Desfoque no fundo */
+    padding: 0%; /* Espaçamento interno */
+    box-sizing:content-box;
+    border-radius: 0px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade */
+}
+
+.pet-container:hover {
+  transform: translateY(-5px);
+}
+
+.hnome{
+  margin-bottom: 0;
+}
+.hpets{
+  margin-top: 0.9px;
+}
+
+.pet-name {
+  font-size: 26px;
+  font-weight: bold;
+  color: #004aad;
+  margin: 0;
+  font-family: 'Times New Roman', serif;
+}
+
+.pet-content, .pet-vaccines, .pet-neutered {
+  font-size: 16px;
+  color: #555;
+  margin: 8px 0;
+}
+
+.image1 {
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #004aad;
+}
+
+.footer {
+  margin-top: auto; /* Empurra o rodapé para o final */
+  background-color: #004aad;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.gostou{
+  margin-bottom: 0px;
+  font-size: 20px;
+}
+
+.contato{
+  margin-bottom: 0;
+}
+
+.email{
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+
+.buttons-container1 button {
+    width: 200px;
+    padding: 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #004aad;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttons-ped{
+  display: flex;
+  align-items: flex-end;    /* Centraliza horizontalmente os itens */
+  justify-content: flex-end;
+  width: 100vw;
+  background-color: #004aad;
+}
+
+.buttons-container1 button:hover{
+  background-color: #5e85ae; /* Cor ao passar o mouse */
+}
+
+
+@media (max-width: 768px) {
+  .pet-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pet-name {
+    font-size: 22px;
+  }
+
+  .pet-content, .pet-vaccines, .pet-neutered {
+    font-size: 14px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+.fas.fa-paw {
+  color: #004aad; 
+  font-size: 24px;
+  margin-right: 10px;
+}}
+
+.review-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 500px;
+}
+
+.review-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.star-rating {
+  margin: 10px 0;
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.star.selected {
+  color: gold;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.submit-button,
+.cancel-button {
+  width: 48%; /* Metade da largura do container */
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-button:hover,
+.cancel-button:hover {
+  background-color: darkblue;
+}
+.rating-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px; /* Ajuste o espaço entre o nome da ONG e as avaliações */
+}
+
+.stars {
+  display: flex;
+  margin-right: 16px; /* Espaçamento entre as estrelas e o botão */
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+}
+
+.star.selected {
+  color: gold;
+}
+
+.view-reviews-button {
+  padding: 8px 16px;
+  background-color: #004aad;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-reviews-button:hover {
+  background-color: #5e85ae;
+}
+
+.reviews-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 500px;
+}
+
+.reviews-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reviews-popup-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.reviews-popup-content li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.close-reviews-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #004aad;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-reviews-button:hover {
+  background-color: #5e85ae;
+}
+
+/* Estilos para a popup de reviews */
+.reviews-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.95); /* Fundo quase opaco para melhor visibilidade */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra mais definida */
+  z-index: 10;
+  width: 600px; /* Largura maior para acomodar mais conteúdo */
+  max-height: 80vh; /* Limita a altura para evitar overflow */
+  overflow-y: auto; /* Adiciona barra de rolagem se necessário */
+}
+
+.reviews-popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.reviews-popup-content h3 {
+  margin-bottom: 15px;
+  color: #004aad; /* Cor consistente com o tema */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.reviews-popup-content ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.reviews-popup-content li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f9f9f9; /* Fundo leve para destacar as reviews */
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+.reviews-popup-content li:last-child {
+  border-bottom: none; /* Remove a borda do último item */
+}
+
+.reviews-popup-content .stars {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.reviews-popup-content .star {
+  font-size: 20px;
+  color: gray;
+  margin-right: 5px;
+}
+
+.nameong{
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.reviews-popup-content .star.selected {
+  color: gold;
+}
+
+.reviews-popup-content p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.reviews-popup-content p strong {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.close-reviews-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #004aad;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-reviews-button:hover {
+  background-color: #5e85ae;
+}
+
